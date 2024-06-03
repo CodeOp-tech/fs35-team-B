@@ -23,7 +23,7 @@ router.get("/:id",categoryMustExist, async (req, res) => {
         const categoryQuery = `SELECT * FROM categories WHERE id = ${req.params.id};`;
 
         const result = await db (categoryQuery);
-       
+        
             res.status(200).send(result.data);
         } catch (err) {
             res.status(500).send(err);
