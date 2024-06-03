@@ -31,6 +31,7 @@ ALTER TABLE
 ALTER TABLE
     `categories` ADD CONSTRAINT `categories_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`);
 
+
 INSERT INTO users (username, password, email) VALUES 
 ('admin', 'adminpassword', 'admin@example.com'),
 
@@ -60,3 +61,4 @@ INSERT INTO resources (link_url, vid_url, doc, img, notes, category_id, user_id)
 ('https://youtu.be/-qfEOE4vtxE?si=3f8J0VxWugvt0LTX', 'https://youtu.be/-qfEOE4vtxE?si=3f8J0VxWugvt0LTX', '', '', 'JavaScript ES6 Tutorial', 1, 0),
 ('https://youtu.be/Cz3WcZLRaWc?si=QF9nlRKskgx2WR15', 'https://youtu.be/Cz3WcZLRaWc?si=QF9nlRKskgx2WR15', '', '', 'JavaScript Full Course', 1, 0),
 ('https://youtu.be/ENrzD9HAZK4?si=ZyNNwdqz8HevAR46', 'https://youtu.be/ENrzD9HAZK4?si=ZyNNwdqz8HevAR46', '', '', 'Modern JavaScript Tutorial', 1, 0);    
+
