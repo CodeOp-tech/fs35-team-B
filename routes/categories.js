@@ -11,7 +11,7 @@ router.get("/:id", async (req, res) => {
         const categoryQuery = `SELECT * FROM videos WHERE id = ${req.params.id};`;
 
         const result = await db (categoryQuery);
-       
+        
             res.status(200).send(result.data);
         } catch (err) {
             res.status(500).send(err);
