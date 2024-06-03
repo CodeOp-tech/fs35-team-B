@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
-
+const resourceMustExist = require("../Guards/resourceMustExist")
 
 
 const select = "SELECT * FROM resources;";
@@ -19,7 +19,7 @@ try {
 });
 
 // GET resource by id
-router.get("/:id", async function(req, res) {
+router.get("/:id",resourceMustExist, async function(req, res) {
     const idQuery = `SELECT FROM resources WHERE id=${req.params.id};`;
     try {
         const result = await db(idQuery);
@@ -43,7 +43,7 @@ router.post("/", async function(req,res) {
 });
 
 
-router.delete("/:id", async function(req, res) {
+router.delete("/:id", resourceMustExist, async function(req, res) {
     const remove = `DELETE FROM resources WHERE id=${req.params.id};`;
     try{
         await db(remove);
