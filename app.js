@@ -8,6 +8,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var publicResourceRouter = require('./routes/publicResource');
+var privateResourceRouter = require('./routes/privateResource');
+var categoriesRouter = require('./routes/categories');
 
 var app = express();
 app.use(cors()); // add after 'app' is created
@@ -20,5 +23,8 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/publicResource', publicResourceRouter);
+app.use('/api/privateResource', privateResourceRouter);
+app.use('/api/categories', categoriesRouter);
 
 module.exports = app;
