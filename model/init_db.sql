@@ -30,3 +30,6 @@ ALTER TABLE
     `resources` ADD CONSTRAINT `resources_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`);
 ALTER TABLE
     `categories` ADD CONSTRAINT `categories_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`id`);
+
+INSERT INTO users (username, password, email) VALUES ("admin","admin123","admin");
+UPDATE users SET id=0 WHERE username="admin";
