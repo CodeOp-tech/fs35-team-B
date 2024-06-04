@@ -10,9 +10,9 @@ import SignUp from "./pages/signUp";
 import Upload from "./pages/upload";
 import Resources from "./pages/resources";
 import authContext from "./contexts/authContext";
-import RequireAuth from "./component/RequireAuth";
-import sideNav from "./component/sideNav"
-import topNav from "./component/topNav"
+import RequireAuth from "./components/RequireAuth";
+import SideNav from "./components/SideNav";
+import TopNav from "./components/TopNav";
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
     <Route path="/" element={<Home />}/>
     <Route path="/resources/:id" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
-    <Route path="/dahsboard" element={<Dashboard />}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
    </Routes> 
  </>
 
