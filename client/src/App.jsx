@@ -21,6 +21,9 @@ function App() {
   return (
 <>
 <div>
+  < TopNav />
+</div>
+<div>
   <Link to="/upload">Upload</Link>
 </div>
   <Routes>  
@@ -30,7 +33,7 @@ function App() {
     <Route path="/resources/:id" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
     <Route path="/dashboard" element={<Dashboard />}/>
-   </Routes> 
+  </Routes> 
  </>
 
   )
