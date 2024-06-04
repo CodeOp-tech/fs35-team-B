@@ -9,13 +9,13 @@ const saltRounds = 10;
 const supersecret = process.env.SUPER_SECRET;
 
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
 
   try {
     const hash = await bcrypt.hash(password, saltRounds);
 
     await db(
-      `INSERT INTO users (username, password) VALUES ("${username}", "${hash}");`
+      `INSERT INTO users (username, password, email) VALUES ("${username}", "${hash}", "${email}");`
     );
 
     res.send({ message: "Register successful" });
@@ -48,6 +48,10 @@ router.post("/login", async (req, res) => {
     res.status(400).send({ message: err.message });
   }
 });
+
+
+
+
 
 
 module.exports = router;
