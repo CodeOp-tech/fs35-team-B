@@ -1,7 +1,40 @@
-import React from 'react'
+import React, { useState, useContext}  from 'react';
+import authContext from "../contexts/authContext";
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-export default function TopNav() {
-  return (
-    <div>TopNav</div>
+
+const TopNav = () => {
+
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
+  const login = async () => {
+    try {
+      //fetch to backend route to login w my creds
+      const { data } = await axios("/api/auth/login", {
+        method: "POST",
+        data: credentials,
+      });
+  
+      //store it locally
+      localStorage.setItem("token", data.token);
+      console.log(data.message, data.token);
+    } catch (error) {
+      console.log(error);
+    }
+  };  
+
+  const logout = () => {
+    localStorage.removeItem("token");
+  };
+
+
+
+
   )
-}
+};
+
+export default TopNav; 
