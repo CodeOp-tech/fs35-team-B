@@ -10,9 +10,9 @@ import SignUp from "./pages/signUp";
 import Upload from "./pages/upload";
 import Resources from "./pages/resources";
 import authContext from "./contexts/authContext";
-import RequireAuth from "./component/RequireAuth";
-import sideNav from "./component/sideNav"
-import topNav from "./component/topNav"
+import RequireAuth from "./components/RequireAuth";
+import sideNav from "./components/sideNav"
+import topNav from "./components/topNav"
 
 
 function App() {
