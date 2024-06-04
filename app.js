@@ -28,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/api/publicResource', publicResourceRouter);
 app.use('/api/privateResource', privateResourceRouter);
 app.use('/api/categories', categoriesRouter);
-app.use(`./api/auth`,authRouter);
+app.use('/api/auth',authRouter);
+
 
 module.exports = app;
