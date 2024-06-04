@@ -11,8 +11,8 @@ import Upload from "./pages/upload";
 import Resources from "./pages/resources";
 import authContext from "./contexts/authContext";
 import RequireAuth from "./components/RequireAuth";
-import sideNav from "./components/sideNav"
-import topNav from "./components/topNav"
+import SideNav from "./components/SideNav";
+import TopNav from "./components/TopNav";
 
 
 function App() {
@@ -20,6 +20,9 @@ function App() {
 
   return (
 <>
+<div>
+  <Link to="/upload">Upload</Link>
+</div>
   <Routes>  
     <Route path="/login" element={<Login />}/>
     <Route path="/signUp" element={<SignUp />}/>

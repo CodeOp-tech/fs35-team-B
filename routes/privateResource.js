@@ -1,7 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
-const resourceMustExist = require("../Guards/resourceMustExist")
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+const resourceMustExist = require("../Guards/resourceMustExist");
+const { v4: uuidv4 } = require("uuid");
+const mime = require("mime-types");
+const fs = require("fs/promises");
+const path = require("path")
 
 
 const select = "SELECT * FROM resources;";
@@ -30,10 +36,22 @@ router.get("/:id",resourceMustExist, async function(req, res) {
 });
 
 // INSERT into resources
-router.post("/", async function(req,res) {
-    const {link_url, vid_url, doc, img, notes, category_id, user_id} = req.body;
-    const post = `INSERT INTO resources (link_url, vid_url, doc, img, notes, category_id, user_id) VALUES ('${link_url}', '${vid_url}', '${doc}', '${img}', '${notes}', ${category_id}, ${user_id});`;
+router.post("/", upload.fields([{name: "imagefile"},{name: "document"}]), async function(req,res) {
+    const imagefile = req.files["imagefile"][0];
+        const document = req.files["document"][0];
+        const imgExtension = mime.extension(imagefile.mimetype);
+        const docExtension = mime.extension(document.mimetype);
+        const imgFileName = uuidv4() + "." + imgExtension;
+        const docFileName = uuidv4() + "." + docExtension;
+        const imgTempPath = imagefile.path;
+        const docTempPath = document.path;
+        const imgTargetPath = path.join(__dirname, "../uploads/", imgFileName);
+        const docTargetPath = path.join(__dirname, "../uploads/", docFileName);
+    const {link_url, vid_url, notes, category_id, user_id} = req.body;
+    const post = `INSERT INTO resources (link_url, vid_url, doc, img, notes, category_id, user_id) VALUES ('${link_url}', '${vid_url}', '${document}', '${imagefile}', '${notes}', ${category_id}, ${user_id});`;
     try {
+        await fs.rename(imgTempPath, imgTargetPath);
+        await fs.rename(docTempPath, docTargetPath);
         await db(post);
         const result = await db(select);
         res.send(result.data);
