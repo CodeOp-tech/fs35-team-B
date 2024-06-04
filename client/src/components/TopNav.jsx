@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function topNav() {
+export default function TopNav() {
   return (
-    <div>topNav</div>
+    <div>TopNav</div>
   )
 }
