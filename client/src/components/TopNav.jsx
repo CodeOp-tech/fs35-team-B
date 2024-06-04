@@ -33,12 +33,6 @@ const TopNav = () => {
 
 
 
-  return (
-    //build simple visual tests: 2 inputs, username, pass, button 
-    //needs handleinputchange to set creds 
-    
-    <div>topNav</div>
-
 
   )
 };
