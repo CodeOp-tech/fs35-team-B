@@ -29,7 +29,7 @@ function App() {
     <Route path="/" element={<Home />}/>
     <Route path="/resources/:id" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
-    <Route path="/dahsboard" element={<Dashboard />}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
    </Routes> 
  </>
 
