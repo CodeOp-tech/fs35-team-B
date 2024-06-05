@@ -39,7 +39,7 @@ router.post ("/", async function (req, res) {
 
     try {
         const {type, user_id} = req.body;
-        const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${user_id});`;
+        const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${0});`;
         await db (addCategories);
 
         const categoryList = "SELECT * FROM categories;" ;

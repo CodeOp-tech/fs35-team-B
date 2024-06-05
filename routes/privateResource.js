@@ -26,6 +26,7 @@ try {
 
 //by user id 
 router.get("/:id",resourceMustExist, async function(req, res) {
+
     const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;
     try {
         const result = await db(idQuery);
@@ -64,7 +65,7 @@ router.post("/", upload.fields([{name: "imagefile"},{name: "document"}]), async 
         const imgTargetPath = path.join(__dirname, "../uploads/", imgFileName);
         const docTargetPath = path.join(__dirname, "../uploads/", docFileName);
     const {link_url, vid_url, notes, category_id, user_id} = req.body;
-    const post = `INSERT INTO resources (link_url, vid_url, doc, img, notes, category_id, user_id) VALUES ('${link_url}', '${vid_url}', '${document}', '${imagefile}', '${notes}', ${category_id}, ${user_id});`;
+    const post = `INSERT INTO resources (link_url, vid_url, doc, img, notes, category_id, user_id) VALUES ('${link_url}', '${vid_url}', '${document}', '${imagefile}', '${notes}', ${category_id}, ${0});`;
     try {
         await fs.rename(imgTempPath, imgTargetPath);
         await fs.rename(docTempPath, docTargetPath);
