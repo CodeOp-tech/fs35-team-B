@@ -11,6 +11,15 @@ const TopNav = () => {
     password: "",
   });
 
+  const [data, setData] = useState(null);
+
+  const { username, password } = credentials;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
   const login = async () => {
     try {
       //fetch to backend route to login w my creds
@@ -36,10 +45,36 @@ const TopNav = () => {
   return (
     //build simple visual tests: 2 inputs, username, pass, button 
     //needs handleinputchange to set creds 
-    
+    <>
     <div>topNav</div>
+      <div>
+        <input 
+        value={username}
+        onChange={handleChange}
+        name='username'
+        type='text'
+        className='' 
+        />
+        <input 
+        value={password}
+        onChange={handleChange}
+        name='password'
+        type='password'
+        className='' 
+        />
+      </div>
+      <div>
+        <button className='' onClick={login}>
+          Log In 
+        </button>
+        <button className='' onClick={{logout}}>
+          Log Out 
+        </button>
+      </div>
 
 
+
+    </>
   )
 };
 
