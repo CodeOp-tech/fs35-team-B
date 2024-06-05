@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function sideNav() {
 
 // state that holds the current selected category 
@@ -26,3 +27,10 @@ function sideNav() {
 }
 
 export default sideNav;
+
+export default function sideNav() {
+  return (
+    <div>sideNav</div>
+  )
+}
+

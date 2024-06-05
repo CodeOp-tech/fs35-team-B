@@ -17,7 +17,7 @@ router.get("/", async function(req,res) {
     }
     });
 
-//Get resources by id (where user_id=0)
+// Get resources by id (where user_id=0)
 router.get("/:id", resourceMustExist, /* userMustBeLoggedIn, */ async function(req,res) {
     const idQuery = `SELECT * FROM resources WHERE id=${req.params.id};`;
        try {
