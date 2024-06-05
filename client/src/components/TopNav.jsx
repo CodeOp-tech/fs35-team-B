@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const TopNav = () => {
 
+
   const {signIn} = useContext(authContext);
   const {isLoggedIn, signOut} = useContext(authContext); //use in return for conditional displays
 
@@ -40,9 +41,9 @@ const TopNav = () => {
     }
   };  
 
-  const logout = () => {
-    localStorage.removeItem("token");
-  };
+//   const logout = () => {
+//     localStorage.removeItem("token");
+//   };
 
 
 
@@ -84,8 +85,6 @@ const TopNav = () => {
 
 
 
-    </>
-  )
 };
 
 export default TopNav; 

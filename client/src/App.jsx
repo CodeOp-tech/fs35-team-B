@@ -47,6 +47,7 @@ function App() {
 </div>
 <div>
   <Link to="/upload">Upload</Link>
+  <Link to="/">Home</Link>
 </div>
 <div>
   <Routes>  
