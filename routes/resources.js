@@ -8,16 +8,22 @@ const { v4: uuidv4 } = require("uuid");
 const mime = require("mime-types");
 const fs = require("fs/promises");
 const path = require("path")
+const getUserId = require("../Guards/getUserId")
 
 
 const select = "SELECT * FROM resources;";
 
-// GET resources by user_id (to be adjusted when LOGIN is created)
-// FOR LATER: INSERT GUARD!
-
-router.get("/", async function(req,res) {
+router.get("/",getUserId, async function(req,res) {
+    const where = [];
+    if (req.query.category) {
+        where.push(`category_id = ${req.query.category}`);    
+    }
+    if (req.user_id) {
+        where.push(`user_id = ${req.user_id}`);
+    }
+    const whereClause = where.length ? `WHERE ${where.join(" AND ")}` : "";
 try {
-    const result = await db(select);
+    const result = await db(select + whereClause);
     res.send(result.data);
 } catch (err) {
     res.status(500).send(err);
@@ -27,7 +33,11 @@ try {
 //by user id 
 router.get("/:id",resourceMustExist, async function(req, res) {
 
+<<<<<<< HEAD:routes/privateResource.js
     const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;
+=======
+    const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;   
+>>>>>>> main:routes/resources.js
     try {
         const result = await db(idQuery);
         res.send(result);
@@ -37,23 +47,23 @@ router.get("/:id",resourceMustExist, async function(req, res) {
 });
 
 // GET resource by category id and type
-router.get("/categories/:id",resourceMustExist, async function(req, res) {
-    const idQuery = `SELECT * FROM resources LEFT JOIN categories ON resources.category_id = categories.id WHERE categories.id =${req.params.id};`;
-    try {
-        const result = await db(idQuery);
-        const resource = result.data;
-        res.send(resource);
-    }catch(err) {
-        res.status(500).send(err);
-    }
-});
+// router.get("/categories/:id",resourceMustExist, async function(req, res) {
+//     const idQuery = `SELECT * FROM resources LEFT JOIN categories ON resources.category_id = categories.id WHERE categories.id =${req.params.id};`;
+//     try {
+//         const result = await db(idQuery);
+//         const resource = result.data;
+//         res.send(resource);
+//     }catch(err) {
+//         res.status(500).send(err);
+//     }
+// });
 
 // SELECT * FROM resources
 // LEFT JOIN categories
 // ON resources.category_id = categories.id;
 
 // INSERT into resources
-router.post("/", upload.fields([{name: "imagefile"},{name: "document"}]), async function(req,res) {
+router.post("/", getUserId, upload.fields([{name: "imagefile"},{name: "document"}]), async function(req,res) {
     const imagefile = req.files["imagefile"][0];
         const document = req.files["document"][0];
         const imgExtension = mime.extension(imagefile.mimetype);

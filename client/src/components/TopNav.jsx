@@ -3,19 +3,19 @@ import authContext from "../contexts/authContext";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+
 const TopNav = () => {
 
-  const {signIn} = useContext(authContext);
-  const {isLoggedIn, signOut} = useContext(authContext); //use in return for conditional displays
+  const {isLoggedIn, signIn, signOut} = useContext(authContext);
 
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
-  const [data, setData] = useState(null);
-
   const { username, password } = credentials;
+
+  const [data, setData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,50 +41,67 @@ const TopNav = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    signOut();
+    console.log("Successfully Logged Out!")
   };
 
 
 
   return (
-    //build simple visual tests: 2 inputs, username, pass, button 
-    //needs handleinputchange to set creds 
-    <>
-    <div>topNav</div>
+    <nav>
+      <ul>
+        { !isLoggedIn ? (
+    <>      
       <div>
         <input 
-        value={username}
-        onChange={handleChange}
-        name='username'
-        type='text'
-        className='' 
-        />
+          value={username}
+          onChange={handleChange}
+          name='username'
+          placeholder='enter username'
+          type='text'
+          className='' 
+          />
         <input 
         value={password}
         onChange={handleChange}
         name='password'
+        placeholder='enter password'
         type='password'
         className='' 
         />
       </div>
       <div>
-        <button className='' onClick={login}> {/* Toggles */}
-          Log In 
-        </button>
-        <button className='' onClick={logout}> {/* Toggles */}
-          Log Out 
-        </button>
+        <button className='' onClick={login}> Log In </button>
       </div>
       <div>
-        <p>No Account Yet? Click here to  <Link Link to="/signUp">register</Link> ! </p>
+        <p>No Account Yet? Click here to <Link Link to="/signUp">register</Link> ! </p>
+      </div>
+    </> 
+    ) : (
+    <>
+      <div>
+        <span> Hello, {username}!</span>
       </div>
       <div>
-        <Link to="/dashboard"> Dashboard </Link> {/* Toggles */}
+        <button className='' onClick={logout} >Log Out</button>
       </div>
-
-
-
-    </>
+      <div>
+        <p>Go to your <Link to="/dashboard">resources</Link>!</p>
+      </div>
+    </>  
+    )}
+      </ul>
+    </nav>
   )
 };
+
+{/* <div>
+<Link to="/dashboard"> Dashboard </Link> 
+</div>
+
+<button className='' onClick={logout}> Log Out </button> */}
+
+
+
 
 export default TopNav; 

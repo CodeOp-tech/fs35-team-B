@@ -66,6 +66,7 @@ export default function Upload() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(newCategory)
       });
@@ -95,9 +96,10 @@ export default function Upload() {
     
 
     try {
-      const res = await axios.post("/api/privateResource", formData, {
+      const res = await axios.post("/api/resources", formData, {
         headers: {
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
+          // "Authorization": `Bearer ${localStorage.getItem("token")}` 
         },
       });
       
