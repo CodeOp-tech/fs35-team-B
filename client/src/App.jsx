@@ -16,10 +16,32 @@ import TopNav from "./components/TopNav";
 
 
 function App() {
-  
+
+  const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+
+  function signIn () {
+    setIsLoggedIn(true);
+    navigate("/home"); // Maybe this needs to change since we want to change the state of the home page but not LEAVE it??
+  }
+
+  function signOut () {
+    setIsLoggedIn(false);
+    navigate("/home"); //Again, whats the best way to handle this? 
+  }
+
+  const auth = {
+    isLoggedIn,
+    signIn,
+    signOut
+  }
+
 
   return (
-<>
+<authContext.Provider value={auth}>
 <div>
   < TopNav />
 </div>
@@ -27,17 +49,19 @@ function App() {
   <Link to="/upload">Upload</Link>
   <Link to="/">Home</Link>
 </div>
+<div>
   <Routes>  
     <Route path="/login" element={<Login />}/>
     <Route path="/signUp" element={<SignUp />}/>
     <Route path="/" element={<Home />}/>
-    <Route path="/resources/:id" element={<Resources />}/>
-    <Route path="/upload" element={<Upload />}/>
-    <Route path="/dashboard" element={<Dashboard />}/>
+    <Route path="/resources/:id" element={<Resources />}/> {/* require auth? */}
+    <Route path="/upload" element={<Upload />}/> {/* <RequireAuth></RequireAuth> */}
+    <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
   </Routes> 
- </>
+</div>
+  </authContext.Provider>
 
-  )
+  );
 }
 
-export default App
+export default App;
