@@ -10,8 +10,8 @@ const TopNav = () => {
   const {isLoggedIn, signOut} = useContext(authContext); //use in return for conditional displays
 
   const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
+    username: "test",
+    password: "test",
   });
 
   const [data, setData] = useState(null);
