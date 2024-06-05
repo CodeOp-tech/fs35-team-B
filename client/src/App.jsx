@@ -46,7 +46,9 @@ function App() {
   < TopNav />
 </div>
 <div>
-  <Link to="/upload">Upload</Link>
+    <Link to="/upload">Upload</Link>
+   <Link to="/">Home</Link>
+   <Link to="/resources/:id">Resources</Link>
 </div>
 <div>
   <Routes>  
