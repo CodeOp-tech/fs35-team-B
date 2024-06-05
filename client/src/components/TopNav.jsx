@@ -3,7 +3,6 @@ import authContext from "../contexts/authContext";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 const TopNav = () => {
 
 
@@ -82,6 +81,7 @@ const TopNav = () => {
       <div>
         <Link to="/dashboard"> Dashboard </Link> {/* Toggles */}
       </div>
+
 
 
 
