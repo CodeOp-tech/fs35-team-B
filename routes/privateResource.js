@@ -24,16 +24,32 @@ try {
 }
 });
 
-// GET resource by id
+//by user id 
 router.get("/:id",resourceMustExist, async function(req, res) {
-    const idQuery = `SELECT * FROM resources WHERE id=${req.params.id};`;
+    const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;
     try {
         const result = await db(idQuery);
-        res.send(result.data[0]);
+        res.send(result);
     }catch(err) {
         res.status(500).send(err);
     }
 });
+
+// GET resource by category id and type
+router.get("/categories/:id",resourceMustExist, async function(req, res) {
+    const idQuery = `SELECT * FROM resources LEFT JOIN categories ON resources.category_id = categories.id WHERE categories.id =${req.params.id};`;
+    try {
+        const result = await db(idQuery);
+        const resource = result.data;
+        res.send(resource);
+    }catch(err) {
+        res.status(500).send(err);
+    }
+});
+
+// SELECT * FROM resources
+// LEFT JOIN categories
+// ON resources.category_id = categories.id;
 
 // INSERT into resources
 router.post("/", upload.fields([{name: "imagefile"},{name: "document"}]), async function(req,res) {

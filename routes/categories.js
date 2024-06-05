@@ -31,6 +31,8 @@ router.get("/:id",categoryMustExist, async (req, res) => {
 
 });
 
+
+
 // POST INTO categories VALUES (…)
 
 router.post ("/", async function (req, res) {

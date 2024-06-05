@@ -21,20 +21,23 @@ function App() {
   return (
 <>
 <div>
+  < TopNav />
+</div>
+<div>
   <Link to="/upload">Upload</Link>
 </div>
 <div>
-  <Link to="/resources">Resources</Link>
+  <Link to="/resources/:id">Resources</Link>
 </div>
 
   <Routes>  
     <Route path="/login" element={<Login />}/>
     <Route path="/signUp" element={<SignUp />}/>
     <Route path="/" element={<Home />}/>
-    <Route path="/resources" element={<Resources />}/>
+    <Route path="/resources/:id" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
     <Route path="/dashboard" element={<Dashboard />}/>
-   </Routes> 
+  </Routes> 
  </>
 
   )
