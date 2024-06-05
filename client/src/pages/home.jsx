@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import { useParams } from "react-router-dom"; 
 
 export default function home() {
-  const {id} = useParams();
+  
   const [resources, setResources] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -16,22 +16,19 @@ useEffect(() => {
   setResources(data);
   });
 
-  fetch(`/api/categories/${id}`)
+  fetch("/api/categories/")
   .then((res) => res.json())
   .then((data) => {
     setCategories(data);
   });
-}, [id]);
+}, []);
 
 
   return (
     <div>
       <h1>The Confused Coder 🦆</h1>
       <h3>General Resources</h3>
-      {/* <ul>
-        <h4>Websites:</h4>
-        {resources.map((resource) => <li key={resource.id}>{resource.link_url}</li>)}
-      </ul> */}
+      
 
 
     </div>

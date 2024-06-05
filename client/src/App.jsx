@@ -60,8 +60,9 @@ function App() {
     <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
   </Routes> 
 </div>
+  <SideNav/>
   </authContext.Provider>
-
+  
   );
 }
 
