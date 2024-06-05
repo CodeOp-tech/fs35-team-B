@@ -1,6 +1,7 @@
 import React from 'react'
 
 function sideNav() {
+  
 
 // state that holds the current selected category 
 // const [categories, setCategories] = useState([]);
