@@ -33,6 +33,7 @@ const TopNav = () => {
       //store it locally
       localStorage.setItem("token", data.token);
       signIn();
+      setCredentials({ username:"", password:"",});
       console.log(data.message, data.token);
     } catch (error) {
       console.log(error);
