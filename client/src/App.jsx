@@ -40,27 +40,30 @@ function App() {
   }
 
 
+
   return (
-<authContext.Provider value={auth}>
-<div>
-  < TopNav />
-</div>
-<div>
-  <Link to="/upload">Upload</Link>
-</div>
-<div>
-  <Routes>  
-    <Route path="/login" element={<Login />}/>
-    <Route path="/signUp" element={<SignUp />}/>
-    <Route path="/" element={<Home />}/>
-    <Route path="/resources/:id" element={<Resources />}/> {/* require auth? */}
-    <Route path="/upload" element={<Upload />}/> {/* <RequireAuth></RequireAuth> */}
-    <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
-  </Routes> 
-</div>
-  </authContext.Provider>
-
-  );
-}
-
-export default App;
+    <authContext.Provider value={auth}>
+    <div>
+      < TopNav />
+    </div>
+    <div>
+        <Link to="/upload">Upload</Link>
+       <Link to="/">Home</Link>
+       <Link to="/resources/:id">Resources</Link>
+    </div>
+    <div>
+      <Routes>  
+        <Route path="/login" element={<Login />}/>
+        <Route path="/signUp" element={<SignUp />}/>
+        <Route path="/" element={<Home />}/>
+        <Route path="/resources/:id" element={<Resources />}/> {/* require auth? */}
+        <Route path="/upload" element={<Upload />}/> {/* <RequireAuth></RequireAuth> */}
+        <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
+      </Routes> 
+    </div>
+      </authContext.Provider>
+    
+      );
+    }
+    
+    export default App;
