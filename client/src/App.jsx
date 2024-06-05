@@ -46,27 +46,13 @@ function App() {
   < TopNav />
 </div>
 <div>
-  < TopNav />
-</div>
-<div>
   <Link to="/upload">Upload</Link>
-  <Link to="/">Home</Link>
 </div>
 <div>
-
-  <Link to="/resources/:id">Resources</Link>
-</div>
-
-
   <Routes>  
     <Route path="/login" element={<Login />}/>
     <Route path="/signUp" element={<SignUp />}/>
     <Route path="/" element={<Home />}/>
-    <Route path="/resources/:id" element={<Resources />}/>
-    <Route path="/upload" element={<Upload />}/>
-    <Route path="/dashboard" element={<Dashboard />}/>
-  </Routes> 
- </>
     <Route path="/resources/:id" element={<Resources />}/> {/* require auth? */}
     <Route path="/upload" element={<Upload />}/> {/* <RequireAuth></RequireAuth> */}
     <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
