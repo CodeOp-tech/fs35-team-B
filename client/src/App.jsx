@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import {Routes, Route, Link, useNavigate} from "react-router-dom";
 import Home from "./pages/home";
 import Dashboard from "./pages/dashboard";
@@ -19,18 +19,20 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("token") ? true : false
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+
+  useEffect(() => {
+    console.log('Login Status Changed', isLoggedIn);
+  }, [isLoggedIn]);
 
   function signIn () {
     setIsLoggedIn(true);
-    navigate("/home"); // Maybe this needs to change since we want to change the state of the home page but not LEAVE it??
+    navigate("/"); // Maybe this needs to change since we want to change the state of the home page but not LEAVE it??
   }
 
   function signOut () {
     setIsLoggedIn(false);
-    navigate("/home"); //Again, whats the best way to handle this? 
+    navigate("/"); //Again, whats the best way to handle this? 
   }
 
   const auth = {
@@ -46,18 +48,17 @@ function App() {
   < TopNav />
 </div>
 <div>
-    <Link to="/upload">Upload</Link>
-   <Link to="/">Home</Link>
-   <Link to="/resources/:id">Resources</Link>
+  <Link to="/upload">Upload</Link>
+  <Link to="/">Home</Link>
+  <Link to="/resources/:id">Resources</Link>
 </div>
 <div>
   <Routes>  
-    <Route path="/login" element={<Login />}/>
     <Route path="/signUp" element={<SignUp />}/>
     <Route path="/" element={<Home />}/>
-    <Route path="/resources/:id" element={<Resources />}/> {/* require auth? */}
-    <Route path="/upload" element={<Upload />}/> {/* <RequireAuth></RequireAuth> */}
-    <Route path="/dashboard" element={<Dashboard />}/> {/* <RequireAuth></RequireAuth> */}
+    <Route path="/resources/:id" element={<Resources />}/>
+    <Route path="/upload" element={<Upload />}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
   </Routes> 
 </div>
   <SideNav/>
