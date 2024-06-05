@@ -29,8 +29,7 @@ router.get("/:id",resourceMustExist, async function(req, res) {
 
     const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;
 
-    const idQuery = `SELECT * FROM resources WHERE id=${req.params.id};`;
-
+   
     try {
         const result = await db(idQuery);
         res.send(result);
