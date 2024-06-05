@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 
 const TopNav = () => {
 
+  const {signIn} = useContext(authContext);
+  const {isLoggedIn, signOut} = useContext(authContext); //use in return for conditional displays
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -30,6 +33,7 @@ const TopNav = () => {
   
       //store it locally
       localStorage.setItem("token", data.token);
+      signIn();
       console.log(data.message, data.token);
     } catch (error) {
       console.log(error);
@@ -64,12 +68,18 @@ const TopNav = () => {
         />
       </div>
       <div>
-        <button className='' onClick={login}>
+        <button className='' onClick={login}> {/* Toggles */}
           Log In 
         </button>
-        <button className='' onClick={{logout}}>
+        <button className='' onClick={logout}> {/* Toggles */}
           Log Out 
         </button>
+      </div>
+      <div>
+        <p>No Account Yet? Click here to  <Link Link to="/signUp">register</Link> ! </p>
+      </div>
+      <div>
+        <Link to="/dashboard"> Dashboard </Link> {/* Toggles */}
       </div>
 
 
