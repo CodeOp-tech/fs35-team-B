@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
-const categoryMustExist = require("../Guards/categoryMustExist")
+const categoryMustExist = require("../Guards/categoryMustExist");
+
 
 const select = "SELECT * FROM categories;";
 
