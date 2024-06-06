@@ -2,7 +2,7 @@ import React, { useState, useContext}  from 'react';
 import authContext from "../contexts/authContext";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import Modal from 'react-modal'; //experiment!!
 
 const TopNav = () => {
 
@@ -13,9 +13,10 @@ const TopNav = () => {
     password: "",
   });
 
-  // const { username, password } = credentials;
+  // const [errorMessage, setErrorMessage ] = useState(""); PRIOR error message, you can get this back!
 
-  // const [data, setData] = useState(null);
+  const [isError, setIsError] = useState(false); //trying something new with modal and history
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,8 +32,12 @@ const TopNav = () => {
       signIn(credentials.username);
       setCredentials({ username:"", password:"",});
       console.log(data.message, data.token);
+      // setErrorMessage("") PRIOR error message, you can get this back!
+      setIsError(false); //new thing
     } catch (error) {
       console.log(error);
+      // setErrorMessage("Please Create an Account to Log In"); PRIOR error message, you can get this back!
+      setIsError(true); //new thing
     }
   };  
 
@@ -40,6 +45,14 @@ const TopNav = () => {
     localStorage.removeItem("token");
     signOut();
     console.log("Successfully Logged Out!")
+  };
+
+  const closeModal = () => { //new thing
+    setIsError(false);
+  };
+
+  const redirectToRegister = () => { //new thing
+    window.location.href = '/register';
   };
 
 
@@ -70,6 +83,20 @@ const TopNav = () => {
       <div>
         <button className='' onClick={login}> Log In </button>
       </div>
+
+      <Modal className='loginModal' isOpen={isError} onRequestClose={closeModal}> 
+        <h2>Error</h2>
+        <div>
+          Please Register to log in. Click<button onClick={redirectToRegister} style={{color:"blue", background:"none",border:"none", textDecoration:"underline", cursor:"pointer"}}>here</button>to register.
+        </div>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
+      
+      {/* {errorMessage && (
+        <div className="error-message">  <--- old thing that works, can get this back if you need
+          <p>{errorMessage}</p>
+        </div>
+      )} */}
       <div>
         <p>No Account Yet? Click here to <Link Link to="/register">register</Link> ! </p>
       </div>
