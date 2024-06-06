@@ -3,6 +3,10 @@ import React from 'react'
 function sideNav() {
   
 
+    // fetches all the categories, map through them 
+
+
+
 // state that holds the current selected category 
 // const [categories, setCategories] = useState([]);
 
@@ -18,6 +22,11 @@ function sideNav() {
    
 //      }
 //     };
+
+// useEffect(() => {
+//     fetchResources ();
+// }, []);
+
 
 //   return (
 //     <div>

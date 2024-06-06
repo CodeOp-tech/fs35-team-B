@@ -6,7 +6,7 @@ import {Routes, Route, Link, useNavigate} from "react-router-dom";
 import Home from "./pages/home";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
-import SignUp from "./pages/signUp";
+import Register from "./pages/register";
 import Upload from "./pages/upload";
 import Resources from "./pages/resources";
 import authContext from "./contexts/authContext";
@@ -55,7 +55,7 @@ function App() {
 </div>
 <div>
   <Routes>  
-    <Route path="/signUp" element={<SignUp />}/>
+    <Route path="/register" element={<Register />}/>
     <Route path="/" element={<Home />}/>
     <Route path="/resources" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
