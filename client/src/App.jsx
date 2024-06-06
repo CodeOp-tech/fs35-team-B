@@ -5,6 +5,8 @@ import './App.css';
 import {Routes, Route, Link, useNavigate} from "react-router-dom";
 import Home from "./pages/home";
 import Dashboard from "./pages/dashboard";
+import Login from "./pages/login";
+import Register from "./pages/register";
 import Login from "./pages/login";// deleting this page!!
 import Register from "./pages/register";// client\src\pages\register.jsx
 import Upload from "./pages/upload";
@@ -47,6 +49,7 @@ function App() {
   }
 
 
+
   return (
 <authContext.Provider value={auth}>
 <div>
@@ -56,6 +59,15 @@ function App() {
   <Link to="/upload">Upload</Link>
   <Link to="/">Home</Link>
   <Link to="/resources/:id">Resources</Link>
+
+  
+  
+</div>
+<div>
+  <Routes>  
+    <Route path="/register" element={<Register />}/>
+    <Route path="/" element={<Home />}/>
+    <Route path="/resources" element={<Resources />}/>
   <Link to="/register">Register</Link>
 </div>
 <div>

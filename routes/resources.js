@@ -11,7 +11,7 @@ const path = require("path")
 const getUserId = require("../Guards/getUserId")
 
 
-const select = "SELECT * FROM resources;";
+const select = "SELECT * FROM resources "; 
 
 router.get("/",getUserId, async function(req,res) {
     const where = [];
