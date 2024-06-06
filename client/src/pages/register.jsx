@@ -4,9 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
 
-const [credentials, setCredentials] = useState({ username: "", password: "", email: ""});
+const [credentials, setCredentials] = useState({ username: null, password: null, email: null});
 const { username, password, email } = credentials;
 const navigate = useNavigate();
+
 
 const handleChange = (e) => {
   const {name, value} = e.target;
@@ -29,7 +30,7 @@ const handleRegister = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log("Registration Successful:", data);
-      setCredentials({username:"", password:"", email:""});
+      setCredentials({username: null, password: null , email: null });
       navigate("/");
     })
     .catch((error) => {
@@ -43,15 +44,15 @@ const handleRegister = () => {
       <form action="submit" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username</label>
-        <input className="form-control mb-2" type="text" name="username" value={username} onChange={handleChange}/>
+        <input required className="form-control mb-2" type="text" name="username" value={username} onChange={handleChange}/>
       </div>
       <div>
           <label htmlFor="email">Email</label>
-          <input className="form-control mb-2" type="email" name="email" value={email} onChange={handleChange} />
+          <input required className="form-control mb-2" type="email" name="email" value={email} onChange={handleChange} />
         </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input className="form-control mb-2" type="text" name="password" value={password} onChange={handleChange}/>
+        <input required className="form-control mb-2" type="text" name="password" value={password} onChange={handleChange}/>
       </div>
       <button className="btn btn-outline-secondary">Register</button>
       </form>
