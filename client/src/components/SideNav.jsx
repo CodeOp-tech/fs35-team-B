@@ -6,7 +6,6 @@ function SideNav() {
 
     const [categoryData, setCategoryData] = useState ([]);
 
-
     
     // use effect when fetching resources
     
