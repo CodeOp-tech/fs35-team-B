@@ -1,29 +1,52 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function sideNav() {
-  
+function SideNav() {
 
-// state that holds the current selected category 
-// const [categories, setCategories] = useState([]);
+    const [categoryData, setCategoryData] = useState ([]);
 
 
-// const fetchCategories = async () => {
-//   try {
-//     const response= await fetch (`api/categories`)
-//     const data = await response.json();
-//       setCategories(data);
-//       //  console.log(data);
-//      } catch(error) {
-//        console.log(error);
+    
+    // use effect when fetching resources
+    
+    useEffect(() => {
+    
+        const fetchCategories = async () => {
+          try {
+            const response = await fetch(`/api/categories`);
+            if (!response.ok) {
+              throw new Error('error found');
+            }
+            const data = await response.json();
+            setCategoryData(data);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+    
    
-//      }
-//     };
+    fetchCategories();
+    }, []);
+    
+    const navigate = useNavigate ()
+    const handleClick = (category_id) => {
+        navigate(`/resources?category_id=${category_id}`);
+    };
 
-//   return (
-//     <div>
-//       <h1> Hello </h1>
-//       </div>
-//   )
-}
 
-export default sideNav;
+
+    return (
+        <div className = "sideBar">
+          
+                {categoryData.map(category => (
+             <button onClick ={() => handleClick (category.id)} key={category.id}> {category.type} </button>
+    
+                ))}
+           
+        </div>
+    );
+    };
+    
+
+export default SideNav;

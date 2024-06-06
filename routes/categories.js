@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
-const categoryMustExist = require("../Guards/categoryMustExist")
+const categoryMustExist = require("../Guards/categoryMustExist");
+
 
 const select = "SELECT * FROM categories;";
 
@@ -38,8 +39,9 @@ router.get("/:id",categoryMustExist, async (req, res) => {
 router.post ("/", async function (req, res) {
 
     try {
-        const {type, user_id} = req.body;
-        const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${0});`;
+        let {type, user_id} = req.body;
+        user_id = user_id || 0;
+        const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${user_id});`;
         await db (addCategories);
 
         const categoryList = "SELECT * FROM categories;" ;

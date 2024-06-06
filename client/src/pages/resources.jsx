@@ -1,66 +1,64 @@
 import React, { useEffect, useState } from 'react'
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 
-// so here based on the selected category ( the button ), then the contents from the database will appear based on the type of category clicked
-// so fetch the data by resource id from backend 
+
 function resources() {
  
-//   // state that holds the data fetched from the backend
-// const [resourcesData, setResourcesData] = useState([]);
+    // what i want to do here is to fetch the resources route 
+    // put out the list of resources, i need 
+    //  in the front end, we always pass the token along 
+    // http://localhost:5173/resources?category_id=3
+
+// state to store fetched resources 
+
+const [resourcesData, setResourcesData ] = useState ([]);
+
+// search params to access the query parameters from the url in postman (resources?category=3)
+const [searchParams] = useSearchParams();
 
 
+// use effect when fetching resources
 
-// // so data from the backend is fetched based on the selected category 
-// const {id} = useParams ();
+useEffect(() => {
+    console.log(searchParams.get("category_id"))
 
-//   const fetchResources = async () => {
-//       try {
-//  const response= await fetch (`/api/privateResource/${id}`)
-//  const data = await response.json();
-//     setResourcesData([data]);
-//     console.log([data]);
-//   } catch(error) {
-//     console.log(error);
+    const fetchResources = async () => {
+      try {
+        //get the value of 'category_id from search params
+        const category = searchParams.get('category_id');
+        
+        const response = await fetch(`/api/resources?category=${category}`);
+        if (!response.ok) {
+          throw new Error('error found');
+        }
+        const data = await response.json();
+        setResourcesData(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-//   }
-//  };
+// fetch data when search params changes
+if (searchParams) {
+    fetchResources();
+  }
+}, [searchParams]);
 
-
-
-//  // fetch the data and run it when the button is clicked 
-//   useEffect(() => {
-//     fetchResources ();
-//     fetchCategories();
-// }, [id]);
-
-
-//   // this should be based on the category type selected
-//   const handleCategoryClick = (resources) => {
-//     console.log(resources)
-
-//   };
-
-  
-
-// // what i want to show up is the link url based on the category id from the table resources. 
-// // so the thing from the category that i want to show up is the type as it contains the name 
-
-// return (
-//   <div>
-//     <h3>Show Resources</h3>
-//     <button key = {categories.type} onClick={() => handleCategoryClick(categories)}>Javascript</button>
-//     {resourcesData.length > 0 && (  // Check if resources exist before mapping
-//       resourcesData.map((resource) => (
-//         <div key={resource.id}>
-//           <a href={resource.link_url}></a> 
-//           <p> {resourcesData.category_type}</p>
-//         </div>
-
-//       ))
-//     )}
-//   </div>
-// );
-}
-
+return (
+    <div>
+        <h1>Resources</h1>
+        <ul>
+            {resourcesData.map(resource => (
+                <li key={resource.id}>
+              <h2>{resource.notes}</h2>
+           <p><a href={resource.link_url}>Link</a></p>
+           <p><a href={resource.vid_url}>Video</a></p>
+           <img src={resource.img} alt={resource.notes} />
+                </li>
+            ))}
+        </ul>
+    </div>
+);
+};
 
 export default resources;
