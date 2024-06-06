@@ -11,7 +11,7 @@ const path = require("path")
 const getUserId = require("../Guards/getUserId")
 
 
-const select = "SELECT * FROM resources;";
+const select = "SELECT * FROM resources "; 
 
 router.get("/",getUserId, async function(req,res) {
     const where = [];
@@ -33,11 +33,7 @@ try {
 //by user id 
 router.get("/:id",resourceMustExist, async function(req, res) {
 
-<<<<<<< HEAD:routes/privateResource.js
-    const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;
-=======
     const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;   
->>>>>>> main:routes/resources.js
     try {
         const result = await db(idQuery);
         res.send(result);

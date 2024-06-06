@@ -57,7 +57,7 @@ function App() {
   <Routes>  
     <Route path="/signUp" element={<SignUp />}/>
     <Route path="/" element={<Home />}/>
-    <Route path="/resources/:id" element={<Resources />}/>
+    <Route path="/resources" element={<Resources />}/>
     <Route path="/upload" element={<Upload />}/>
     <Route path="/dashboard" element={<Dashboard />}/>
   </Routes> 
