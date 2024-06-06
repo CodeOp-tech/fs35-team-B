@@ -7,8 +7,8 @@ const resourceMustExist = require("../Guards/resourceMustExist");
 const { v4: uuidv4 } = require("uuid");
 const mime = require("mime-types");
 const fs = require("fs/promises");
-const path = require("path")
-const getUserId = require("../Guards/getUserId")
+const path = require("path");
+const getUserId = require("../Guards/getUserId");
 
 
 const select = "SELECT * FROM resources "; 

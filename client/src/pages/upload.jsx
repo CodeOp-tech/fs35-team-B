@@ -15,6 +15,7 @@ export default function Upload() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [error, setError] = useState ("")
 
   useEffect(() => {
     async function fetchCategories() {
@@ -27,8 +28,8 @@ export default function Upload() {
       }
     }
     fetchCategories();
-  }, []);
-
+  }, [newCategory]);
+ 
   const handleCategoryChange = event => {
     const { value } = event.target;
     if (value === "add-category") {
@@ -117,15 +118,16 @@ export default function Upload() {
       });
       setSelectedImage(null);
       setSelectedDocument(null);
+      setError("")
     } catch (error) {
+      setError("Please select a category.")
       console.log(error);
     }
   };
 
   return (
     <div className="container text-center">
-      <div className="row">
-        <div className="col">
+      <div className="row">      
           {isAddingCategory && (
             <form className="form-group" onSubmit={handleUpload}>
               <label className="form-label" htmlFor="new-category">New Category</label>
@@ -139,10 +141,7 @@ export default function Upload() {
               />
               <button className="btn btn-outline-secondary" type="submit">Add Category</button>
             </form>
-          )}
-        </div>
-
-        <div className="col">
+          )}        
           <form className="form-group" onSubmit={handleUpload}>
             <label className="form-label" htmlFor="link_url">Website Link</label>
             <input
@@ -192,8 +191,8 @@ export default function Upload() {
             </select>
             <button className="btn btn-outline-secondary" type="submit">Upload</button>
           </form>
+          
         </div>
-      </div>
-    </div>
+      </div>    
   );
 }
