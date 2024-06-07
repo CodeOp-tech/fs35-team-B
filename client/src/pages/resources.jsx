@@ -44,6 +44,7 @@ if (searchParams) {
   }
 }, [searchParams]);
 
+
 return (
     <div>
         <h1>Resources</h1>
