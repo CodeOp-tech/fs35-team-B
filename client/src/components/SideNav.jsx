@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 function SideNav() {
 
+  // import the authcategories 
+  
     const [categoryData, setCategoryData] = useState ([]);
 
     
