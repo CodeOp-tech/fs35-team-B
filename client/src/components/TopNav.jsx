@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 
 const TopNav = () => {
 
-  const {isLoggedIn, signIn, signOut} = useContext(authContext);
+  const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
 
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
-  const { username, password } = credentials;
+  // const { username, password } = credentials;
 
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,14 +25,11 @@ const TopNav = () => {
   const login = async () => {
     try {
       //fetch to backend route to login w my creds
-      const { data } = await axios("/api/auth/login", {
-        method: "POST",
-        data: credentials,
-      });
-  
+      const { data } = await axios.post("/api/auth/login", credentials);
       //store it locally
       localStorage.setItem("token", data.token);
-      signIn();
+      signIn(credentials.username);
+      setCredentials({ username:"", password:"",});
       console.log(data.message, data.token);
     } catch (error) {
       console.log(error);
@@ -54,7 +51,7 @@ const TopNav = () => {
     <>      
       <div>
         <input 
-          value={username}
+          value={credentials.username}
           onChange={handleChange}
           name='username'
           placeholder='enter username'
@@ -62,7 +59,7 @@ const TopNav = () => {
           className='' 
           />
         <input 
-        value={password}
+        value={credentials.password}
         onChange={handleChange}
         name='password'
         placeholder='enter password'
@@ -74,13 +71,13 @@ const TopNav = () => {
         <button className='' onClick={login}> Log In </button>
       </div>
       <div>
-        <p>No Account Yet? Click here to <Link Link to="/signUp">register</Link> ! </p>
+        <p>No Account Yet? Click here to <Link Link to="/register">register</Link> ! </p>
       </div>
     </> 
     ) : (
     <>
       <div>
-        <span> Hello, {username}!</span>
+        <p> Hello, {username}!</p>
       </div>
       <div>
         <button className='' onClick={logout} >Log Out</button>
@@ -94,14 +91,5 @@ const TopNav = () => {
     </nav>
   )
 };
-
-{/* <div>
-<Link to="/dashboard"> Dashboard </Link> 
-</div>
-
-<button className='' onClick={logout}> Log Out </button> */}
-
-
-
 
 export default TopNav; 
