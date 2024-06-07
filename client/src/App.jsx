@@ -18,6 +18,7 @@ function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [username, setUserName] = useState(localStorage.getItem("username") || "");
+  //new state: categories; context provider
 
   useEffect(() => {
     console.log('Login Status Changed', isLoggedIn);
@@ -44,10 +45,10 @@ function App() {
     signOut
   }
 
-
-
+//categories context provider here
   return (
 <authContext.Provider value={auth}>
+
 <div>
   < TopNav />
 </div>
@@ -55,15 +56,6 @@ function App() {
   {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
   <Link to="/">Home</Link>
   <Link to="/resources/:id">Resources</Link>
-
-  
-  
-</div>
-<div>
-  <Routes>  
-    <Route path="/register" element={<Register />}/>
-    <Route path="/" element={<Home />}/>
-    <Route path="/resources" element={<Resources />}/>
   <Link to="/register">Register</Link>
 </div>
 <div>
