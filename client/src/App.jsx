@@ -18,6 +18,7 @@ function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [username, setUserName] = useState(localStorage.getItem("username") || "");
+  //new state: categories; context provider
 
   useEffect(() => {
     console.log('Login Status Changed', isLoggedIn);
@@ -44,9 +45,10 @@ function App() {
     signOut
   }
 
-
+//categories context provider here
   return (
 <authContext.Provider value={auth}>
+
 <div>
   < TopNav />
 </div>

@@ -60,13 +60,13 @@ router.get("/:id",resourceMustExist, async function(req, res) {
 
 // INSERT into resources
 router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "document" }]), async function (req, res) {
-  let { link_url, vid_url, notes, category_id, user_id } = req.body;
+  let { link_url, vid_url, notes, category_id } = req.body;
 
   link_url = link_url || '';
   vid_url = vid_url || '';
   notes = notes || '';
   category_id = category_id || 0;
-  user_id = user_id || 0;
+  const user_id = req.user_id
 
   let imgFileName = '';
   let docFileName = '';

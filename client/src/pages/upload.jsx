@@ -3,21 +3,51 @@ import axios from 'axios';
 
 export default function Upload() {
   const [categories, setCategories] = useState([]);
-  const [newCategory, setNewCategory] = useState("");
+  const [newCategory, setNewCategory] = useState({
+    type: ""   
+  });
+ 
   const [input, setInput] = useState({
     link_url: "",
     vid_url: "",
     doc: "",
     img: "",
     notes: "",
-    category_id: ""
+    category_id: ""   
   });
+
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
-  const [isAddingCategory, setIsAddingCategory] = useState(false);
-  const [error, setError] = useState ("")
+
+  const handleCategoryChange = event => {
+    const { name, value } = event.target;
+    setNewCategory(state => ({ ...state, [name]: value }));
+  }
+
+  const handleCategorySubmit = event => {
+    event.preventDefault();
+    addCategory();
+  }
+
+ 
+  const handleInputChange = event => {
+    const { name, value, files } = event.target;
+    if (name === "img") {
+      setSelectedImage(files[0]); 
+    } else if (name === "doc") {
+      setSelectedDocument(files[0]); 
+    } else {
+      setInput(state => ({ ...state, [name]: value })); 
+    }
+  }
+
+  const handleUpload = event => {
+    event.preventDefault();
+    addResources();
+  }
 
   useEffect(() => {
+    // Fetch categories with async/await
     async function fetchCategories() {
       try {
         const res = await fetch("/api/categories");
@@ -29,37 +59,10 @@ export default function Upload() {
     }
     fetchCategories();
   }, [newCategory]);
- 
-  const handleCategoryChange = event => {
-    const { value } = event.target;
-    if (value === "add-category") {
-      setIsAddingCategory(true);
-      setInput(state => ({ ...state, category_id: "" }));
-    } else {
-      setIsAddingCategory(false);
-      setInput(state => ({ ...state, category_id: value }));
-    }
-  };
-
-  const handleInputChange = event => {
-    const { name, value, files } = event.target;
-    if (name === "img") {
-      setSelectedImage(files[0]);
-    } else if (name === "doc") {
-      setSelectedDocument(files[0]);
-    } else {
-      setInput(state => ({ ...state, [name]: value }));
-    }
-  };
-
-  const handleUpload = async event => {
-    event.preventDefault();
-    if (isAddingCategory) {
-      await addCategory();
-    } else {
-      await addResources();
-    }
-  };
+  
+  useEffect(() => {      
+    
+  }, []);
 
   const addCategory = async () => {
     try {
@@ -69,13 +72,14 @@ export default function Upload() {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
-        body: JSON.stringify({ type: newCategory })
+        body: JSON.stringify(newCategory)
       });
       const category = await response.json();
       setCategories(prevCategories => [...prevCategories, category]);
-      setNewCategory("");
-      setInput(state => ({ ...state, category_id: category.id }));
-      setIsAddingCategory(false); // Reset adding category state
+      setNewCategory({
+        type: ""
+        
+      });
     } catch (error) {
       console.log(error);
     }
@@ -106,6 +110,7 @@ export default function Upload() {
       const res = await axios.post("/api/resources", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       });
 
@@ -125,74 +130,65 @@ export default function Upload() {
     }
   };
 
+
   return (
-    <div className="container text-center">
-      <div className="row">      
-          {isAddingCategory && (
-            <form className="form-group" onSubmit={handleUpload}>
-              <label className="form-label" htmlFor="new-category">New Category</label>
-              <input
-                type="text"
-                name="new-category"
-                value={newCategory}
-                onChange={e => setNewCategory(e.target.value)}
-                placeholder="Enter Category"
-                className="form-control"
-              />
-              <button className="btn btn-outline-secondary" type="submit">Add Category</button>
-            </form>
-          )}        
-          <form className="form-group" onSubmit={handleUpload}>
-            <label className="form-label" htmlFor="link_url">Website Link</label>
-            <input
-              type="text"
-              name="link_url"
-              value={input.link_url}
-              onChange={handleInputChange}
-              placeholder="Enter Website/Article-Link"
-              className="form-control"
-            />
-            <label className="form-label" htmlFor="vid_url">Video Link</label>
-            <input
-              type="text"
-              name="vid_url"
-              value={input.vid_url}
-              onChange={handleInputChange}
-              placeholder="Enter Video-Link"
-              className="form-control"
-            />
-            <label className="form-label" htmlFor="doc">Select Document</label>
-            <input type="file" name="doc" onChange={handleInputChange} className="form-control" />
-            <label className="form-label" htmlFor="img">Select Image</label>
-            <input type="file" name="img" onChange={handleInputChange} className="form-control" />
-            <label className="form-label" htmlFor="notes">Notes</label>
-            <textarea
-              name="notes"
-              value={input.notes}
-              onChange={handleInputChange}
-              placeholder="Enter Notes"
-              className="form-control"
-              rows="5"
-            />
-            <label className="form-label" htmlFor="category">Category</label>
-            <select
-              name="category_id"
-              value={input.category_id}
-              onChange={handleCategoryChange}
-              className="form-control"
-            >
-              <option value="">Select Category</option>
-              {categories.map(category => (
-                <option key={category.id} value={category.id}>
-                  {category.type}
-                </option>
-              ))}
-              <option value="add-category">Add Category</option>
-            </select>
-            <button className="btn btn-outline-secondary" type="submit">Upload</button>
-          </form>
-          
-        </div>
-      </div>    
+    <div>
+      <form className='from-group' onSubmit={handleCategorySubmit}>
+        <label htmlFor="category">New Category</label>
+        <input
+          type="text"
+          name="type"
+          value={newCategory.type}
+          onChange={handleCategoryChange}
+          className="form-control"
+        />
+        <button className="btn btn-outline-secondary" type="submit">Add Category</button>
+      </form>
+      <br />
+      <form className='from-group' onSubmit={handleUpload}> 
+        <label className='form-label' htmlFor="link_url">Website Link</label>
+        <input
+          type="text"
+          name="link_url"
+          value={input.link_url}
+          onChange={handleInputChange}
+          className="form-control"
+        />
+        <label className='form-label' htmlFor="vid_url">Video Link</label>
+        <input
+          type="text"
+          name="vid_url"
+          value={input.vid_url}
+          onChange={handleInputChange}
+          className="form-control"
+        />
+        <label className='form-label' htmlFor="doc">Select Document</label>
+        <input type="file" name="doc" onChange={handleInputChange} className="form-control"/>
+        <label className='form-label' htmlFor="img">Select Image</label>
+        <input type="file" name="img" onChange={handleInputChange} className="form-control"/>
+        <label className='form-label' htmlFor="notes">Notes</label>
+        <textarea
+          name="notes"
+          value={input.notes}
+          onChange={handleInputChange}
+          className="form-control"
+        ></textarea>
+        <label htmlFor="category">Category</label>
+        <select
+          name="category_id"
+          value={input.category_id}
+          onChange={handleInputChange}
+          className="form-control"
+        >
+          <option value="">Select Category</option>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.type}
+            </option>
+          ))}
+        </select>
+        <button className="btn btn-outline-secondary" type="submit">Upload</button> 
+      </form>
+    </div>
   );
 }
