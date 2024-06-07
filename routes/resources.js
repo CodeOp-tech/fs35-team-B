@@ -76,7 +76,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
     const imgExtension = mime.extension(imagefile.mimetype);
     imgFileName = uuidv4() + "." + imgExtension;
     const imgTempPath = imagefile.path;
-    const imgTargetPath = path.join(__dirname, "../uploads/", imgFileName);
+    const imgTargetPath = path.join(__dirname, "../public/uploads/", imgFileName);
 
     try {
       await fs.rename(imgTempPath, imgTargetPath);
@@ -90,7 +90,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
     const docExtension = mime.extension(document.mimetype);
     docFileName = uuidv4() + "." + docExtension;
     const docTempPath = document.path;
-    const docTargetPath = path.join(__dirname, "../uploads/", docFileName);
+    const docTargetPath = path.join(__dirname, "../public/uploads/", docFileName);
 
     try {
       await fs.rename(docTempPath, docTargetPath);

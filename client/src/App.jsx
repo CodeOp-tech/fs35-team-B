@@ -55,7 +55,7 @@ function App() {
 <div>
   {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
   <Link to="/">Home</Link>
-  <Link to="/resources/:id">Resources</Link>
+  <Link to="/resources">Resources</Link>
   <Link to="/register">Register</Link>
 </div>
 <div>
@@ -63,7 +63,7 @@ function App() {
     
     <Route path="/" element={<Home />}/>
     <Route path="/register" element={<Register />}/>
-    <Route path="/resources/:id" element={<Resources />}/>
+    <Route path="/resources" element={<Resources />}/>
     <Route path="/upload" element=  {<RequireAuth><Upload /></RequireAuth>}/> 
   </Routes> 
 </div>
