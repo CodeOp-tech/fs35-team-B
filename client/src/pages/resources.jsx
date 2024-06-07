@@ -54,17 +54,15 @@ return (
            <p><a href={resource.link_url}>Link</a></p>
            <p><a href={resource.vid_url}>Video</a></p>
            {resource.img}
-           <img src={resource.img}
-           alt={resource.notes} 
+           <img src={`/uploads/${resource.img}`}
+           alt={resource.notes}
           />
-          <p><a href = {resource.doc} download >Document</a></p>
-
-           
+          <p><a href = {`/uploads/${resource.doc}`} download >Document</a></p>
                 </li>
             ))}
         </ul>
     </div>
 );
 };
-
 export default resources;
+
