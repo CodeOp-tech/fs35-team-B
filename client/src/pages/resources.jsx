@@ -46,24 +46,24 @@ if (searchParams) {
 
 
 return (
-  <div>
-      <h1>Resources</h1>
-      <ul>
-          {resourcesData.map(resource => (
-              <li key={resource.id}>
-            <h2>{resource.notes}</h2>
-         <p><a href={resource.link_url}>Link</a></p>
-         <p><a href={resource.vid_url}>Video</a></p>
-   
-         <img src={`/uploads/${resource.img}`}
-         alt={resource.notes}
-        />
-        <p><a href = {`/uploads/${resource.doc}`} download >Document</a></p>
-              </li>
-          ))}
-      </ul>
-  </div>
+    <div>
+        <h1>Resources</h1>
+        <ul>
+            {resourcesData.map(resource => (
+                <li key={resource.id}>
+              <h2>{resource.notes}</h2>
+           <p><a href={resource.link_url}>Link</a></p>
+           <p><a href={resource.vid_url}>Video</a></p>
+           {resource.img}
+           <img src={`/uploads/${resource.img}`}
+           alt={resource.notes}
+          />
+          <p><a href = {`/uploads/${resource.doc}`} download >Document</a></p>
+                </li>
+            ))}
+        </ul>
+    </div>
 );
 };
-
 export default resources;
+
