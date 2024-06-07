@@ -31,13 +31,31 @@ function SideNav() {
         navigate(`/resources?category_id=${category_id}`);
     };
 
+    const deleteCategory = (id) => {
+      fetch(`/api/categories/${id}`, {
+        method: "DELETE",
+      })
+      .then((response) => response.json())
+      .then((category) => {
+        setCategoryData(category);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+    };
+
 
 
     return (
         <div className = "sideBar">
-          {categories.map(category => (
-            <button onClick ={() => handleClick (category.id)} key={category.id}> {category.type} </button>
-    ))}
+
+          
+                {categoryData.map(category => (
+             <button onClick ={() => handleClick (category.id)} key={category.id}> {category.type} <button onClick={() => deleteCategory(category.id)}>❌</button></button>
+    
+                ))}
+           
+
         </div>
       );
     };

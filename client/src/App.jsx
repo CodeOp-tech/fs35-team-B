@@ -47,6 +47,7 @@ function App() {
 
   return (
 <authContext.Provider value={auth}>
+
   <CategoriesProvider>
     <div>
     < TopNav />
