@@ -4,11 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import {Routes, Route, Link, useNavigate} from "react-router-dom";
 import Home from "./pages/home";
-import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
 import Register from "./pages/register";
-import Login from "./pages/login";// deleting this page!!
-import Register from "./pages/register";// client\src\pages\register.jsx
 import Upload from "./pages/upload";
 import Resources from "./pages/resources";
 import authContext from "./contexts/authContext";
@@ -22,6 +18,7 @@ function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [username, setUserName] = useState(localStorage.getItem("username") || "");
+  //new state: categories; context provider
 
   useEffect(() => {
     console.log('Login Status Changed', isLoggedIn);
@@ -48,26 +45,17 @@ function App() {
     signOut
   }
 
-
-
+//categories context provider here
   return (
 <authContext.Provider value={auth}>
+
 <div>
   < TopNav />
 </div>
 <div>
-  <Link to="/upload">Upload</Link>
+  {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
   <Link to="/">Home</Link>
   <Link to="/resources/:id">Resources</Link>
-
-  
-  
-</div>
-<div>
-  <Routes>  
-    <Route path="/register" element={<Register />}/>
-    <Route path="/" element={<Home />}/>
-    <Route path="/resources" element={<Resources />}/>
   <Link to="/register">Register</Link>
 </div>
 <div>
@@ -76,8 +64,7 @@ function App() {
     <Route path="/" element={<Home />}/>
     <Route path="/register" element={<Register />}/>
     <Route path="/resources/:id" element={<Resources />}/>
-    <Route path="/upload" element={<Upload />}/>
-    <Route path="/dashboard" element={<Dashboard />}/>
+    <Route path="/upload" element=  {<RequireAuth><Upload /></RequireAuth>}/> 
   </Routes> 
 </div>
   <SideNav/>
