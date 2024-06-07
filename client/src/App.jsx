@@ -45,7 +45,6 @@ function App() {
   }
 
 
-
   return (
 <authContext.Provider value={auth}>
 <div>
@@ -55,15 +54,6 @@ function App() {
   {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
   <Link to="/">Home</Link>
   <Link to="/resources/:id">Resources</Link>
-
-  
-  
-</div>
-<div>
-  <Routes>  
-    <Route path="/register" element={<Register />}/>
-    <Route path="/" element={<Home />}/>
-    <Route path="/resources" element={<Resources />}/>
   <Link to="/register">Register</Link>
 </div>
 <div>
