@@ -53,7 +53,13 @@ return (
               <h2>{resource.notes}</h2>
            <p><a href={resource.link_url}>Link</a></p>
            <p><a href={resource.vid_url}>Video</a></p>
-           <img src={resource.img} alt={resource.notes} />
+           {resource.img}
+           <img src={resource.img}
+           alt={resource.notes} 
+          />
+          <p><a href = {resource.doc} download >Document</a></p>
+
+           
                 </li>
             ))}
         </ul>
