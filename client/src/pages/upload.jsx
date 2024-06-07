@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import CategoriesContext from '/src/contexts/categoriesContext';
 
 export default function Upload() {
-  const [categories, setCategories] = useState([]);
+  const { categories, setCategories } = useContext(CategoriesContext);
+  
   const [newCategory, setNewCategory] = useState({
     type: ""   
   });
@@ -18,6 +20,7 @@ export default function Upload() {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
+  const [error, setError ] = useState("");
 
   const handleCategoryChange = event => {
     const { name, value } = event.target;
@@ -29,7 +32,7 @@ export default function Upload() {
     addCategory();
   }
 
- 
+
   const handleInputChange = event => {
     const { name, value, files } = event.target;
     if (name === "img") {
