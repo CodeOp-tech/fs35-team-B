@@ -3,11 +3,12 @@ var router = express.Router();
 const db = require("../model/helper");
 const categoryMustExist = require("../Guards/categoryMustExist");
 const getUserId = require ("../Guards/getUserId");
+const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn");
 
 
 const select = "SELECT * FROM categories;";
 
-router.get("/", async function(req,res) {
+router.get("/", getUserId, async function(req,res) {
 try {
     const result = await db(select);
     res.send(result.data);
@@ -19,7 +20,7 @@ try {
 
 // GET * FROM categories WHERE user_id = req.user_id
 
-router.get("/:id", getUserId, categoryMustExist, async (req, res) => {
+router.get("/:id", [getUserId, categoryMustExist], async (req, res) => {
 
     try {
         const categoryQuery = `SELECT * FROM categories WHERE id = ${req.params.id};`;
@@ -45,8 +46,7 @@ router.post ("/",getUserId, async function (req, res) {
         const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${user_id});`;
         await db (addCategories);
 
-        const categoryList = "SELECT * FROM categories;" ;
-        const result = await db (categoryList);
+        const result = await db (select);
 
         res.status(200).send(result.data);
     } catch (err) {
@@ -58,14 +58,21 @@ router.post ("/",getUserId, async function (req, res) {
 
 });
 
-router.delete("/:id",categoryMustExist, async function(req, res) {
-    // const removeResources = `DELETE FROM resources WHERE category_id=${req.params.id};`;
-    const remove = `DELETE FROM categories WHERE id=${req.params.id};`;
-    try{
-        await db(remove);
+
+router.delete("/:id", [userMustBeLoggedIn, categoryMustExist], async function(req, res) {
+    const categoryId = req.params.id;
+    const checkResources = `SELECT COUNT(*) as count FROM resources WHERE category_id=${categoryId};`;
+    const removeResource = `DELETE FROM resources WHERE category_id=${categoryId};`;
+    const removeCategory = `DELETE FROM categories WHERE id=${categoryId};`;
+    try {
+        const resourceCheckResult = await db(checkResources);        
+        if (resourceCheckResult.data[0].count > 0) {            
+            await db(removeResource);
+        }  
+        await db(removeCategory);    
         const result = await db(select);
         res.send(result.data);
-    }catch(err){
+    } catch (err) {
         res.status(500).send(err);
     }
 });
