@@ -19,10 +19,15 @@ router.get("/",getUserId, async function(req,res) {
     if (req.query.category) {
         where.push(`category_id = ${req.query.category}`);    
     }
-    if (req.user_id) {
-        where.push(`user_id = ${req.user_id}`);
+    if (req.user_id !== undefined) {
+      // if there is user id include resources created by user
+        where.push(`(user_id = ${req.user_id} OR user_id = 0) `);
+    } else {
+      // if user is not authenticated,include public resources 
+      where.push(`user_id = 0`);
     }
     const whereClause = where.length ? `WHERE ${where.join(" AND ")}` : "";
+    console.log(select + whereClause)
 try {
     const result = await db(select + whereClause);
     res.send(result.data);
