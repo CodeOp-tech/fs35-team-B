@@ -30,11 +30,29 @@
 
 /* moved in from App.css */
 .sideBar {
+  position: fixed;
+  top: 56px;
+  right: 0;
+  width: 200px;
+  height: calc(100vh - 56px);
+  background-color: #f8f9fa;
   border: 1px solid palevioletred;
-  display: flex;
+  padding-top: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  /* display: flex;
   flex-direction: column-reverse;
   margin: 5%;
-  flex-grow: 4;
+  flex-grow: 4; */
+}
+
+.sideBar .nav-link {
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.sideBar .nav-link:hover{
+  color: #007bff;
 }
 
 .navbar .form-inline {
@@ -69,8 +87,9 @@ a:hover {
 body {
   margin: 0;
   padding-top: 56px;
+  padding-right: 200px ;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -111,3 +130,37 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* @media (max-width: 768px) {
+  body{
+    padding-right: 0;
+  }
+
+  .sideBar {
+    width: 100%;
+    height: auto;
+    position: static;
+    box-shadow: none;
+  }
+
+  .content{
+    padding: 1rem;
+  }
+  .toggle-button {
+    display: block;
+  }
+
+}
+
+.toggle-button {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  z-index: 1001;
+  cursor: pointer;
+} */
