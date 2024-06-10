@@ -52,6 +52,7 @@ function SideNav() {
         <div className = "sideBar">
           {categories.map(category => (
             <div><button onClick ={() => handleClick (category.id)} key={category.id}> {category.type}</button><button onClick={() => deleteCategory(category.id)}>❌</button></div>
+
         ))}
         </div>
       );

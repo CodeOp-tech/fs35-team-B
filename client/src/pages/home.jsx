@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TopNav from "../components/TopNav";
-import SideNav from "../components/SideNav";
+import TopNav from "/src/components/TopNav";
+import SideNav from "/src/components/SideNav";
 import {Link} from "react-router-dom"; 
 import { useParams } from "react-router-dom"; 
 
