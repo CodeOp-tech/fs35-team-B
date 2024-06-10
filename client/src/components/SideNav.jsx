@@ -32,15 +32,17 @@ function SideNav() {
     };
 
     const deleteCategory = (id) => {
+      alert("Do you really want to delete the category and all its possible resources?")
       fetch(`/api/categories/${id}`, {
         method: "DELETE",
       })
       .then((response) => response.json())
       .then((category) => {
-        setCategoryData(category);
+        setCategories(category);
       })
       .catch((error) => {
         console.log(error)
+       
       });
     };
 
@@ -48,14 +50,9 @@ function SideNav() {
 
     return (
         <div className = "sideBar">
-
-          
-                {categoryData.map(category => (
-             <button onClick ={() => handleClick (category.id)} key={category.id}> {category.type} <button onClick={() => deleteCategory(category.id)}>❌</button></button>
-    
-                ))}
-           
-
+          {categories.map(category => (
+            <div><button onClick ={() => handleClick (category.id)} key={category.id}> {category.type}</button><button onClick={() => deleteCategory(category.id)}>❌</button></div>
+        ))}
         </div>
       );
     };

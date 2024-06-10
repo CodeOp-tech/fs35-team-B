@@ -9,6 +9,7 @@ const mime = require("mime-types");
 const fs = require("fs/promises");
 const path = require("path");
 const getUserId = require("../Guards/getUserId");
+const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn")
 
 
 const select = "SELECT * FROM resources "; 
@@ -31,7 +32,7 @@ try {
 });
 
 //by user id 
-router.get("/:id",resourceMustExist, async function(req, res) {
+router.get("/:id", [getUserId, resourceMustExist], async function(req, res) {
 
     const idQuery = `SELECT * FROM resources WHERE id =${req.params.id};`;   
     try {
@@ -117,7 +118,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
 });
 
 
-router.delete("/:id", resourceMustExist, async function(req, res) {
+router.delete("/:id", [userMustBeLoggedIn, resourceMustExist], async function(req, res) {
     const remove = `DELETE FROM resources WHERE id=${req.params.id};`;
     try{
         await db(remove);

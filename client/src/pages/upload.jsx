@@ -21,6 +21,7 @@ export default function Upload() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [error, setError ] = useState("");
+  // const [isAddingCategory, setIsAddingCategory] = useState(false)
 
   const handleCategoryChange = event => {
     const { name, value } = event.target;
@@ -177,11 +178,13 @@ export default function Upload() {
           className="form-control"
         ></textarea>
         <label htmlFor="category">Category</label>
+        <div className='invalid-feedback'>Selecting a Category is Required.</div>
         <select
           name="category_id"
           value={input.category_id}
           onChange={handleInputChange}
           className="form-control"
+          required="require"     
         >
           <option value="">Select Category</option>
           {categories.map(category => (
@@ -189,7 +192,7 @@ export default function Upload() {
               {category.type}
             </option>
           ))}
-        </select>
+        </select>        
         <button className="btn btn-outline-secondary" type="submit">Upload</button> 
       </form>
     </div>
