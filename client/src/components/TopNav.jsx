@@ -51,7 +51,7 @@ const TopNav = () => {
         { !isLoggedIn ? (
           <>
             <li className="nav-item d-flex align-items-center">
-              <form className="form-inline" onSubmit={login}>
+              <form className="form-inline d-flex" onSubmit={login}>
                 <input
                   required
                   value={credentials.username}
@@ -79,7 +79,7 @@ const TopNav = () => {
           </>
         ) : (
           <>
-            <li className="nav-item">
+            <li className="nav-item d-flex align-items-center">
               <span className="navbar-text">Hello, {username}!</span>
             </li>
             <li className="nav-item">

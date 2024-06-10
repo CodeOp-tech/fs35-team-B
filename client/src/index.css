@@ -37,6 +37,26 @@
   flex-grow: 4;
 }
 
+.navbar .form-inline {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.navbar .form-control {
+  width: auto;
+  flex: 1;
+  
+}
+
+.navbar .form-inline .btn {
+  margin-left: 8px;
+}
+
+.navbar-brand {
+  margin-left: 16px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -48,6 +68,7 @@ a:hover {
 
 body {
   margin: 0;
+  padding-top: 56px;
   display: flex;
   place-items: center;
   min-width: 320px;
