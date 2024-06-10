@@ -59,6 +59,7 @@ router.post ("/",getUserId, async function (req, res) {
 });
 
 router.delete("/:id",categoryMustExist, async function(req, res) {
+    // const removeResources = `DELETE FROM resources WHERE category_id=${req.params.id};`;
     const remove = `DELETE FROM categories WHERE id=${req.params.id};`;
     try{
         await db(remove);
