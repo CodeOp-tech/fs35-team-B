@@ -26,7 +26,8 @@ function SideNav() {
     fetchCategories();
     }, [setCategories]);
     
-    const navigate = useNavigate ()
+    const navigate = useNavigate ();
+
     const handleClick = (category_id) => {
         navigate(`/resources?category_id=${category_id}`);
     };
@@ -46,16 +47,32 @@ function SideNav() {
       });
     };
 
-
-
     return (
-        <div className = "sideBar">
-          {categories.map(category => (
-            <div><button onClick ={() => handleClick (category.id)} key={category.id}> {category.type}</button><button onClick={() => deleteCategory(category.id)}>❌</button></div>
 
+
+      <div className = "sideBar">
+      {categories.map(category => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <button onClick ={() => handleClick (category.id)} style={{ flex: 1 }} key={category.id}>{category.type}</button>
+          <button onClick={() => deleteCategory(category.id)}>❌</button>
+      </div>
         ))}
         </div>
-      );
-    };
+  
+
+    //   <div className="sideBar">
+    //     {categories.map(category => (
+    //       <div key={category.id} style={{ display: 'flex', alignItems: 'center' }}>
+    //         <button onClick={() => handleClick(category.id)} style={{ flex: 1 }}>
+    //           {category.type}
+    //         </button>
+    //         <button onClick={(e) => deleteCategory(category.id, e)}>❌</button>
+    //       </div>
+    //     ))}
+    //   </div>
+    // );
+
+    );
+  };
     
 export default SideNav;

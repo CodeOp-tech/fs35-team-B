@@ -58,6 +58,7 @@ router.post ("/",getUserId, async function (req, res) {
 
 });
 
+
 router.delete("/:id", [userMustBeLoggedIn, categoryMustExist], async function(req, res) {
     const categoryId = req.params.id;
     const checkResources = `SELECT COUNT(*) as count FROM resources WHERE category_id=${categoryId};`;
