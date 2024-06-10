@@ -13,5 +13,3 @@ return (
 };
 
 export default CategoriesContext;
-
-
