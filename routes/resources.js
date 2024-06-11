@@ -116,7 +116,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
 
   try {
     await db(post);
-    const result = await db('SELECT * FROM resources'); 
+    const result = await db('SELECT * FROM resources'); // Adjust the select query as needed
     res.send(result);
   } catch (err) {
     res.status(500).send(err);
