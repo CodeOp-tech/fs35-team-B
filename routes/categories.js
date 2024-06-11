@@ -7,58 +7,26 @@ const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn");
 const protectPublicResource = require("../Guards/protectPublicResource");
 
 
-const selectCategories = "SELECT * FROM categories";
+const select = "SELECT * FROM categories ";
 
-// select * from categories where user_id = 3 
-
-router.get("/", getUserId, async function(req, res) {
-    try {
-        // query is mutable, depending on the users status 
-        let query;
-        // If user is authenticated, fetch their categories and public categories
-        if (req.user_id !== undefined) {
-            query = `${selectCategories} WHERE (user_id = ${req.user_id} OR user_id = 0)`;
-            console.log(query)
-        } else {
-            // If user is not authenticated, fetch only public categories
-            query = `${selectCategories} WHERE user_id = 0`;
-        }
-
-        const result = await db(query);
-        res.send(result.data);
-    } catch (err) {
-        res.status(500).send(err);
+router.get("/", getUserId, async function(req,res) {
+const where = [];
+    if (req.user_id !== undefined) {
+      // if there is user id include resources created by user
+        where.push(`(user_id = ${req.user_id} OR user_id = 0) `);
+    } else {
+      // if user is not authenticated,include public resources 
+      where.push(`user_id = 0`);
     }
+    const whereClause = where.length ? `WHERE ${where.join(" AND ")}` : "";
+    console.log(select + whereClause)
+try {
+    const result = await db(select + whereClause);
+    res.send(result.data);
+} catch (err) {
+    res.status(500).send(err);
+}
 });
-
-
-
-// const selectCategories = "SELECT * FROM categories";
-
-// router.get("/",getUserId, async function(req,res) {
-//     // string as categories are string
-//     const whereClause = [];
-//     if (req.user_id !== undefined) {
-//       // if there is user id include resources created by user
-//         whereClause= `WHERE (user_id = ${req.user_id} OR user_id = 0) `;
-//     } else {
-//       // if user is not authenticated,include public resources 
-//       // select * categories where user_id = 0
-//       whereClause =  `WHERE user_id = 0`;
-//     }
- 
-//     const query = `${selectCategories} ${whereClause}`;
-//     console.log("query", query )
-
-// try {
-//     const result = await db(`${selectCategories} ${whereClause}`);
-//     res.send(result.data);
-// } catch (err) {
-//     res.status(500).send(err);
-// }
-// });
-
-
 
 
 // GET * FROM categories WHERE user_id = req.user_id
@@ -89,16 +57,7 @@ router.post ("/",getUserId, async function (req, res) {
         const addCategories = `INSERT INTO categories (type, user_id) VALUES ("${type}", ${user_id});`;
         await db (addCategories);
 
-
-        // Fetch the updated list of categories to send back
-        let query;
-        if (user_id !== undefined) {
-            query = `${selectCategories} WHERE (user_id = ${req.user_id} OR user_id = 0)`;
-        } else {
-            query = `${selectCategories} WHERE user_id = 0`;
-        }
-
-        const result = await db (query);
+        const result = await db("SELECT * FROM categories;");
 
         res.status(200).send(result.data);
     } catch (err) {
@@ -122,7 +81,7 @@ router.delete("/:id", [userMustBeLoggedIn, protectPublicResource("categories") ,
             await db(removeResource);
         }  
         await db(removeCategory);    
-        const result = await db(select);
+        const result = await db("SELECT * FROM categories;");
         res.send(result.data);
     } catch (err) {
         res.status(500).send(err);
