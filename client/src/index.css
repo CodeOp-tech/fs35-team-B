@@ -13,7 +13,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+body {
+  margin: 0;
+  padding-top: 136px; /* accommodate topnav and header */
+  padding-right: 200px; /*accommodate the size of side nav */
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
 
 /* moved in from App.css */
 #root {
@@ -28,13 +35,14 @@
   padding: 2em;
 }
 
-/* moved in from App.css */
+/* SIDENAV CSS */
+
 .sideBar {
   position: fixed;
-  top: 56px;
+  top: 136px; /* below topnav & header */
   right: 0;
   width: 200px;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 136px); /* full height minus topnav & header */
   background-color: #f8f9fa;
   border: 1px solid palevioletred;
   padding-top: 20px;
@@ -53,6 +61,13 @@
 
 .sideBar .nav-link:hover{
   color: #007bff;
+}
+
+
+/* TOP NAVBAR CSS */
+
+.navbar{
+  z-index: 950;
 }
 
 .navbar .form-inline {
@@ -75,6 +90,30 @@
   margin-left: 16px;
 }
 
+/* HEADER CSS */
+
+.header {
+  background-color: goldenrod;
+  /* width: calc(100%-200px); */
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0; 
+  top: 56px;
+  z-index: 900;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -84,19 +123,13 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  padding-top: 56px;
-  padding-right: 200px ;
-  display: flex;
-  /* place-items: center; */
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 h1 {
-  font-size: 3.2em;
+  font-size: 6vw;
   line-height: 1.1;
+  margin: 0;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
 }
 
 button {
@@ -131,21 +164,37 @@ button:focus-visible {
   }
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   body{
     padding-right: 0;
+    padding-top: 136px;
   }
 
   .sideBar {
     width: 100%;
     height: auto;
     position: static;
+    top: auto;
+    right: auto;
+    padding: 0;
     box-shadow: none;
+  }
+
+  .header{
+    width: 100%;
+    top: 56px;
+  }
+
+  .navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
 
   .content{
     padding: 1rem;
   }
+
   .toggle-button {
     display: block;
   }
@@ -163,4 +212,4 @@ button:focus-visible {
   padding: 10px;
   z-index: 1001;
   cursor: pointer;
-} */
+}
