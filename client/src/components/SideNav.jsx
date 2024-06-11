@@ -13,7 +13,14 @@ function SideNav() {
     
         const fetchCategories = async () => {
           try {
-            const response = await fetch(`/api/categories`);
+            const token = localStorage.getItem ("token");
+            // checks if the token exists in the local storage 
+            const headers = {};
+            if (token) {
+              headers['Authorization'] = `Bearer ${token}`;
+            }
+          // fetches the categories together w
+            const response = await fetch(`/api/categories`, {headers});
             if (!response.ok) {
               throw new Error('error found');
             }
@@ -26,7 +33,7 @@ function SideNav() {
         }
 
     fetchCategories();
-    }, [setCategories]);
+    }, [setCategories, isLoggedIn]);
     
     const navigate = useNavigate ()
     const handleClick = (category_id) => {
