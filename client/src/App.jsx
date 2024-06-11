@@ -55,12 +55,12 @@ function App() {
     < TopNav />
     <Header />
     </div>
-      <div>
+      {/* <div>
         {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
         <Link to="/">Home</Link>
         <Link to="/resources/">Resources</Link>
         <Link to="/register">Register</Link>
-      </div>
+      </div> */}
       <div>
         <Routes>
           <Route path="/" element={<Home />}/>

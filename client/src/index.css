@@ -15,7 +15,7 @@
 
 body {
   margin: 0;
-  padding-top: 136px; /* accommodate topnav and header */
+  padding-top: 86px; /* accommodate topnav and header */
   padding-right: 200px; /*accommodate the size of side nav */
   display: flex;
   min-width: 320px;
@@ -39,19 +39,24 @@ body {
 
 .sideBar {
   position: fixed;
-  top: 136px; /* below topnav & header */
+  top: 56px; /* below topnav & header */
   right: 0;
-  width: 200px;
-  height: calc(100vh - 136px); /* full height minus topnav & header */
+  width: 130px;
+  height: calc(100vh - 56px); /* full height minus topnav & header */
   background-color: #f8f9fa;
   border: 1px solid palevioletred;
   padding-top: 20px;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   z-index: 1000;
-  /* display: flex;
-  flex-direction: column-reverse;
-  margin: 5%;
+  display: flex;
+  flex-direction: column;
+  /*margin: 5%;
   flex-grow: 4; */
+}
+
+.sideBar button {
+  padding: .3em .6em;
+  font-size: .8em;
 }
 
 .sideBar .nav-link {
@@ -68,6 +73,7 @@ body {
 
 .navbar{
   z-index: 950;
+  padding: 0.5rem;
 }
 
 .navbar .form-inline {
@@ -87,7 +93,8 @@ body {
 }
 
 .navbar-brand {
-  margin-left: 16px;
+  margin-left: 8px;
+  font-size: 1.2em;
 }
 
 /* HEADER CSS */
@@ -96,7 +103,7 @@ body {
   background-color: goldenrod;
   /* width: calc(100%-200px); */
   width: 100%;
-  height: 80px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,6 +121,32 @@ body {
   padding: 0 20px;
 }
 
+/* IFRAME STYLES */
+
+/* .home-page {
+  padding-top: 136px;
+  padding-right: 200px;
+} */
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 136px);
+
+}
+
+.iframe-container iframe {
+  width: 80vw;
+  height: 100%;
+  border: 2px solid black;
+}
+
+.top-text, .bottom-text {
+  margin: 1rem 0;
+  color: #000;
+  text-align: center;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -123,20 +156,21 @@ a:hover {
   color: #535bf2;
 }
 
+p {
+  font-size: .9em;
+}
+
 h1 {
-  font-size: 6vw;
+  font-size: 4vw;
   line-height: 1.1;
   margin: 0;
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.4em .9em;
+  font-size: .8em;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -174,9 +208,10 @@ button:focus-visible {
     width: 100%;
     height: auto;
     position: static;
-    top: auto;
-    right: auto;
-    padding: 0;
+    top: 136px;
+    right: 0;
+    left: 0;
+    padding: 10px;
     box-shadow: none;
   }
 
