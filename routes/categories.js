@@ -4,6 +4,7 @@ const db = require("../model/helper");
 const categoryMustExist = require("../Guards/categoryMustExist");
 const getUserId = require ("../Guards/getUserId");
 const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn");
+const protectPublicResource = require("../Guards/protectPublicResource");
 
 
 const select = "SELECT * FROM categories;";
@@ -59,14 +60,14 @@ router.post ("/",getUserId, async function (req, res) {
 });
 
 
-router.delete("/:id", [userMustBeLoggedIn, categoryMustExist], async function(req, res) {
-    const categoryId = req.params.id;
+router.delete("/:id", [userMustBeLoggedIn, protectPublicResource("categories") ,categoryMustExist], async function(req, res) {
+    const categoryId = req.params.id;    
     const checkResources = `SELECT COUNT(*) as count FROM resources WHERE category_id=${categoryId};`;
     const removeResource = `DELETE FROM resources WHERE category_id=${categoryId};`;
-    const removeCategory = `DELETE FROM categories WHERE id=${categoryId};`;
+    const removeCategory = `DELETE FROM categories WHERE id=${categoryId};`;    
     try {
         const resourceCheckResult = await db(checkResources);        
-        if (resourceCheckResult.data[0].count > 0) {            
+        if (resourceCheckResult.data[0].count > 0) {                 
             await db(removeResource);
         }  
         await db(removeCategory);    

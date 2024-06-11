@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 const resourceMustExist = require('../Guards/resourceMustExist');
+
 /* const userMustBeLoggedIn = require(`../Guards/userMustbeLoggedIn`) */
 
 const select = "SELECT * FROM resources;";
