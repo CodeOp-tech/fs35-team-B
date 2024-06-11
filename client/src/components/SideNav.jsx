@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import  CategoriesContext from '/src/contexts/categoriesContext';
+import authContext from "../contexts/authContext";
 
 
 function SideNav() {
   
   const { categories, setCategories } = useContext(CategoriesContext);
+  const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
     
     useEffect(() => {
     
@@ -51,16 +53,19 @@ function SideNav() {
 
 
 
-    return (
-        <div className = "sideBar">
-          {categories.map(category => (
-            <div>
-              <button onClick ={() => handleClick (category.id)} key={category.id}> {category.type}</button>
-              <button onClick={() => deleteCategory(category.id)}>❌</button>
-            </div>
-        ))}
-        </div>
-      );
+return (
+  <div className="sideBar">
+    {categories.map(category => (
+      <div key={category.id}>
+        <button onClick={() => handleClick(category.id)}> {category.type} </button>
+        {isLoggedIn ? (
+          <button onClick={() => deleteCategory(category.id)}>❌</button>
+        ) : null}
+      </div>
+    ))}
+  </div>
+);
+
     };
     
 export default SideNav;

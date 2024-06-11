@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext} from 'react'
 import {useParams, useSearchParams} from "react-router-dom";
+import authContext from "../contexts/authContext";
 
 function resources() {
  
@@ -11,7 +12,7 @@ function resources() {
 
 // state to store fetched resources
 
-
+const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
 const [resourcesData, setResourcesData ] = useState ([]);
 
 // search params to access the query parameters from the url in postman (resources?category=3)
@@ -56,7 +57,22 @@ if (searchParams) {
   }
 }, [searchParams]);
 
-
+const deleteResource = (id) => {     
+      fetch(`/api/resources/${id}`, {
+        method: "DELETE",
+         headers: {          
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+      })
+      .then((response) => response.json())
+      .then((category) => {
+        setCategories(category);
+      })
+      .catch((error) => {
+        console.log(error)
+       
+      });
+    };
 
 
 return (
@@ -66,13 +82,27 @@ return (
             {resourcesData.map(resource => (
                 <li key={resource.id}>
               <h2>{resource.notes}</h2>
-           <p><a href={resource.link_url}>Link</a></p>
-           <p><a href={resource.vid_url}>Video</a></p>
+           <p>
+            <a href={resource.link_url}>Link</a>
+           {isLoggedIn ?
+            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+           </p>
+           <p>
+            <a href={resource.vid_url}>Video</a>
+            {isLoggedIn ?
+            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+          </p>
            {resource.img}
            <img src={`/uploads/${resource.img}`}
            alt={resource.notes}
           />
-          <p><a href = {`/uploads/${resource.doc}`} download >Document</a></p>
+          {isLoggedIn ?
+            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+          <p>
+            <a href = {`/uploads/${resource.doc}`} download >Document</a>
+            {isLoggedIn ?
+            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+          </p>
                 </li>
             ))}
         </ul>
