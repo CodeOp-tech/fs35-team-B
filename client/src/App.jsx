@@ -11,7 +11,6 @@ import authContext from "./contexts/authContext";
 import RequireAuth from "./components/RequireAuth";
 import SideNav from "./components/SideNav";
 import TopNav from "./components/TopNav";
-import Header from './components/Header';
 import { CategoriesProvider } from '/src/contexts/categoriesContext';
 
 
@@ -48,19 +47,36 @@ function App() {
 
   return (
 <authContext.Provider value={auth}>
-
-
   <CategoriesProvider>
     <div>
     < TopNav />
-    <Header />
     </div>
-      {/* <div>
-        {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
+    <nav className="nav d-flex justify-content-start flex-row">
+      {isLoggedIn ? (
+      <div className="container-links">
+        <li className="nav-link">
+         <Link to="/upload">Upload</Link> 
+        </li>      
+      </div> ): null}
+       {!isLoggedIn ? (
+      <div className="container-links">
+        <li className="nav-link">
+         <Link to="/register">Register</Link>
+        </li>
+      </div> ) : null}
+      <div className="container-links">
+        <li className="nav-link">
         <Link to="/">Home</Link>
+        </li>
+      </div>
+      <div className="container-links"> 
+        <li className="nav-link">
         <Link to="/resources/">Resources</Link>
-        <Link to="/register">Register</Link>
-      </div> */}
+        </li>
+      </div>
+     
+      </nav>
+
       <div>
         <Routes>
           <Route path="/" element={<Home />}/>

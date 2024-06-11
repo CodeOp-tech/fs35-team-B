@@ -61,7 +61,8 @@ function SideNav() {
 
 
 return (
-  <div className="sideBar">
+  <div>
+    <div className="sideBar">
     {categories.map(category => (
       <div key={category.id}>
         <button onClick={() => handleClick(category.id)}> {category.type} </button>
@@ -70,7 +71,8 @@ return (
         ) : null}
       </div>
     ))}
-  </div>
+    </div>
+ </div>
 );
 
     };
