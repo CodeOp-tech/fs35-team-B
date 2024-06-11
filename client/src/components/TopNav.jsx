@@ -30,7 +30,7 @@ const TopNav = () => {
     console.log("Successfully Logged Out!")
   };
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top w-100">
+    <nav className="navbar navbar-expand-sm fixed-top w-100"> {/* navbar-light bg-light */}
     <Link className="navbar-brand" to="/">🦆</Link>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
