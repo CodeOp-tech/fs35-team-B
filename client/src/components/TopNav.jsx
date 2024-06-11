@@ -74,19 +74,25 @@ const TopNav = () => {
               </form>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/resources">Resources</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/register">Register</Link>
             </li>
           </>
         ) : (
           <>
             <li className="nav-item d-flex align-items-center">
-              <span className="navbar-text">Hello, {username}!</span>
+              <span className="navbar-text">Hello, {username} !</span>
             </li>
             <li className="nav-item">
               <button className="btn btn-primary" onClick={logout}>Log Out</button>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/resources">Resources</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/upload">Uploads</Link>
             </li>
           </>
         )}
