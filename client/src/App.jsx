@@ -11,6 +11,7 @@ import authContext from "./contexts/authContext";
 import RequireAuth from "./components/RequireAuth";
 import SideNav from "./components/SideNav";
 import TopNav from "./components/TopNav";
+import Header from './components/Header';
 import { CategoriesProvider } from '/src/contexts/categoriesContext';
 
 
@@ -52,6 +53,7 @@ function App() {
   <CategoriesProvider>
     <div>
     < TopNav />
+    <Header />
     </div>
       <div>
         {isLoggedIn ? <Link to="/upload">Upload</Link> : null}

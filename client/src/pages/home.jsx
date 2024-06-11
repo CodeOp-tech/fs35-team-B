@@ -10,7 +10,7 @@ export default function home() {
 
   return (
     <div>
-      <h1>The Confused Coder 🦆</h1>
+      <h1></h1>
        
     </div>
   )
