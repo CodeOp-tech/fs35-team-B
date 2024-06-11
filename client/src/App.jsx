@@ -11,52 +11,46 @@ import authContext from "./contexts/authContext";
 import RequireAuth from "./components/RequireAuth";
 import SideNav from "./components/SideNav";
 import TopNav from "./components/TopNav";
+import Header from './components/Header';
 import { CategoriesProvider } from '/src/contexts/categoriesContext';
-
-
 function App() {
-
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [username, setUserName] = useState(localStorage.getItem("username") || "");
-
   useEffect(() => {
     console.log('Login Status Changed', isLoggedIn);
   }, [isLoggedIn]);
-
-  function signIn (username) { 
+  function signIn (username) {
     setIsLoggedIn(true);
     setUserName(username);
     localStorage.setItem("username", username)
-    navigate("/"); 
+    navigate("/");
   }
-
   function signOut() {
     setIsLoggedIn(false);
     setUserName("");
     localStorage.removeItem("username");
-    navigate("/"); 
+    navigate("/");
   }
-
   const auth = {
     isLoggedIn,
     username,
     signIn,
     signOut
   }
-
   return (
 <authContext.Provider value={auth}>
   <CategoriesProvider>
     <div>
     < TopNav />
+    <Header />
     </div>
-    <nav className="nav d-flex justify-content-start flex-row">
+    {/* <nav className="nav d-flex justify-content-start flex-row">
       {isLoggedIn ? (
       <div className="container-links">
         <li className="nav-link">
-         <Link to="/upload">Upload</Link> 
-        </li>      
+         <Link to="/upload">Upload</Link>
+        </li>
       </div> ): null}
        {!isLoggedIn ? (
       <div className="container-links">
@@ -69,26 +63,23 @@ function App() {
         <Link to="/">Home</Link>
         </li>
       </div>
-      <div className="container-links"> 
+      <div className="container-links">
         <li className="nav-link">
         <Link to="/resources/">Resources</Link>
         </li>
       </div>
-     
-      </nav>
-
+      </nav> */}
       <div>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/resources/" element={<Resources />}/>
-          <Route path="/upload" element=  {<RequireAuth><Upload /></RequireAuth>}/> 
-        </Routes> 
+          <Route path="/upload" element=  {<RequireAuth><Upload /></RequireAuth>}/>
+        </Routes>
       </div>
     <SideNav/>
   </CategoriesProvider>
 </authContext.Provider>
 );
 }
-
 export default App;
