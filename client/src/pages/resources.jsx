@@ -78,6 +78,14 @@ const deleteResource = (id) => {
 return (
     <div>
         <h1>Resources</h1>
+        <div>
+          <h3>Welcome to your personal resources page.</h3>
+          <br />
+          <h5>Bring order to the chaos.</h5>
+          <br />
+          <br />
+          <img src="https://media3.giphy.com/media/RbDKaczqWovIugyJmW/200.webp?cid=790b76111uc2ygprpe624yogorzd8pyctlbdoh3qq8k656vd&ep=v1_gifs_search&rid=200.webp&ct=g" alt="" />
+        </div>
         <ul>
             {resourcesData.map(resource => (
                 <li key={resource.id}>

@@ -47,18 +47,36 @@ function App() {
 
   return (
 <authContext.Provider value={auth}>
-
-
   <CategoriesProvider>
     <div>
     < TopNav />
     </div>
-      <div>
-        {isLoggedIn ? <Link to="/upload">Upload</Link> : null}
+    <nav className="nav d-flex justify-content-start flex-row">
+      {isLoggedIn ? (
+      <div className="container-links">
+        <li className="nav-link">
+         <Link to="/upload">Upload</Link> 
+        </li>      
+      </div> ): null}
+       {!isLoggedIn ? (
+      <div className="container-links">
+        <li className="nav-link">
+         <Link to="/register">Register</Link>
+        </li>
+      </div> ) : null}
+      <div className="container-links">
+        <li className="nav-link">
         <Link to="/">Home</Link>
-        <Link to="/resources/">Resources</Link>
-        <Link to="/register">Register</Link>
+        </li>
       </div>
+      <div className="container-links"> 
+        <li className="nav-link">
+        <Link to="/resources/">Resources</Link>
+        </li>
+      </div>
+     
+      </nav>
+
       <div>
         <Routes>
           <Route path="/" element={<Home />}/>

@@ -21,7 +21,7 @@ export default function Upload() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [error, setError ] = useState("");
-  // const [isAddingCategory, setIsAddingCategory] = useState(false)
+ 
 
   const handleCategoryChange = event => {
     const { name, value } = event.target;
@@ -136,7 +136,14 @@ export default function Upload() {
 
 
   return (
-    <div>
+    <div className="create-category-container">
+      <br />
+      <br />
+      <h3>Manage your resources</h3>
+      <br />
+      <br />
+      <div>
+        <p><strong>Create your own categories:</strong></p>
       <form className='from-group' onSubmit={handleCategorySubmit}>
         <label htmlFor="category">New Category</label>
         <input
@@ -148,7 +155,10 @@ export default function Upload() {
         />
         <button className="btn btn-outline-secondary" type="submit">Add Category</button>
       </form>
+      </div>
       <br />
+      <div className="create-resource-container">
+        <p><strong>Upload your personal resources:</strong></p>
       <form className='from-group' onSubmit={handleUpload}> 
         <label className='form-label' htmlFor="link_url">Website Link</label>
         <input
@@ -194,7 +204,8 @@ export default function Upload() {
           ))}
         </select>        
         <button className="btn btn-outline-secondary" type="submit">Upload</button> 
-      </form>
+      </form> 
+      </div>   
     </div>
   );
 }

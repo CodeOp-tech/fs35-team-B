@@ -85,9 +85,9 @@ const TopNav = () => {
             <li className="nav-item">
               <button className="btn btn-primary" onClick={logout}>Log Out</button>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/resources">Resources</Link>
-            </li>
+            </li> */}
           </>
         )}
       </ul>
