@@ -9,7 +9,8 @@ const mime = require("mime-types");
 const fs = require("fs/promises");
 const path = require("path");
 const getUserId = require("../Guards/getUserId");
-const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn")
+const userMustBeLoggedIn = require("../Guards/userMustBeLoggedIn");
+const protectPublicResource = require("../Guards/protectPublicResource");
 
 
 const select = "SELECT * FROM resources "; 
@@ -123,7 +124,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
 });
 
 
-router.delete("/:id", [userMustBeLoggedIn, resourceMustExist], async function(req, res) {
+router.delete("/:id", [userMustBeLoggedIn, protectPublicResource("resources"), resourceMustExist], async function(req, res) {
     const remove = `DELETE FROM resources WHERE id=${req.params.id};`;
     try{
         await db(remove);
