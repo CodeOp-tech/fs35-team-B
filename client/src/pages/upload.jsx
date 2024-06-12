@@ -3,8 +3,8 @@ import axios from 'axios';
 import CategoriesContext from '/src/contexts/categoriesContext';
 
 export default function Upload() {
-  const { categories, setCategories } = useContext(CategoriesContext);
-  
+  const { categories, setCategories } = useContext(CategoriesContext); 
+
   const [newCategory, setNewCategory] = useState({
     type: ""   
   });
@@ -19,7 +19,9 @@ export default function Upload() {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
+
   const [selectedDocument, setSelectedDocument] = useState(null);
+
   const [error, setError ] = useState("");
  
 
@@ -50,24 +52,21 @@ export default function Upload() {
     addResources();
   }
 
-  useEffect(() => {
-    // Fetch categories with async/await
-    async function fetchCategories() {
-      try {
-        const res = await fetch("/api/categories");
-        const data = await res.json();
-        setCategories(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchCategories();
-  }, [newCategory]);
+  // useEffect(() => {
+  //   // Fetch categories with async/await
+  //   async function fetchCategories() {
+  //     try {
+  //       const res = await fetch("/api/categories");
+  //       const data = await res.json();
+  //       setCategories(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchCategories();
+  // }, []);
   
-  useEffect(() => {      
-    
-  }, []);
-
+ 
   const addCategory = async () => {
     try {
       const response = await fetch("/api/categories", {
@@ -78,8 +77,8 @@ export default function Upload() {
         },
         body: JSON.stringify(newCategory)
       });
-      const category = await response.json();
-      setCategories(prevCategories => [...prevCategories, category]);
+      const categories = await response.json();
+      setCategories(categories);
       setNewCategory({
         type: ""
         

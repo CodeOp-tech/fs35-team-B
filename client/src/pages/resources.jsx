@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext} from 'react'
 import {useParams, useSearchParams} from "react-router-dom";
 import authContext from "../contexts/authContext";
+import CategoriesContext from '/src/contexts/categoriesContext';
 
 function resources() {
  
@@ -13,7 +14,9 @@ function resources() {
 // state to store fetched resources
 
 const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
+const { categories, setCategories } = useContext(CategoriesContext);
 const [resourcesData, setResourcesData ] = useState ([]);
+const [resources, setResources] = useState([])
 
 // search params to access the query parameters from the url in postman (resources?category=3)
 const [searchParams] = useSearchParams();
@@ -65,8 +68,8 @@ const deleteResource = (id) => {
         },
       })
       .then((response) => response.json())
-      .then((category) => {
-        setCategories(category);
+      .then((resource) => {
+      setResources(resource);
       })
       .catch((error) => {
         console.log(error)
@@ -78,37 +81,40 @@ const deleteResource = (id) => {
 return (
     <div>
         <h1>Resources</h1>
-        <div>
+        <br />
+        <br />
+        {isLoggedIn? (
+          <div>
           <h3>Welcome to your personal resources page.</h3>
           <br />
           <h5>Bring order to the chaos.</h5>
           <br />
           <br />
           <img src="https://media3.giphy.com/media/RbDKaczqWovIugyJmW/200.webp?cid=790b76111uc2ygprpe624yogorzd8pyctlbdoh3qq8k656vd&ep=v1_gifs_search&rid=200.webp&ct=g" alt="" />
-        </div>
+        </div>) : (<h5>Please select a category to see resources</h5>)}
         <ul>
             {resourcesData.map(resource => (
                 <li key={resource.id}>
               <h2>{resource.notes}</h2>
            <p>
             <a href={resource.link_url}>Link</a>
-           {isLoggedIn ?
+           {isLoggedIn && resource.user_id !== 0 ?
             (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
            </p>
            <p>
             <a href={resource.vid_url}>Video</a>
-            {isLoggedIn ?
+            {isLoggedIn && resource.user_id !== 0 ?
             (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
           </p>
            {resource.img}
            <img src={`/uploads/${resource.img}`}
            alt={resource.notes}
           />
-          {isLoggedIn ?
+          {isLoggedIn && resource.user_id !== 0 ?
             (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
           <p>
             <a href = {`/uploads/${resource.doc}`} download >Document</a>
-            {isLoggedIn ?
+            {isLoggedIn && resource.user_id !== 0 ?
             (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
           </p>
                 </li>
