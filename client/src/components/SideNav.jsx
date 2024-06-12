@@ -33,7 +33,7 @@ function SideNav() {
         }
 
     fetchCategories();
-    }, [setCategories, isLoggedIn]);
+    }, [isLoggedIn]);
     
     const navigate = useNavigate ()
     const handleClick = (category_id) => {
@@ -66,7 +66,7 @@ return (
     {categories.map(category => (
       <div key={category.id}>
         <button onClick={() => handleClick(category.id)}> {category.type} </button>
-        {isLoggedIn ? (
+        {isLoggedIn && category.user_id !== 0 ? (
           <button onClick={() => deleteCategory(category.id)}>❌</button>
         ) : null}
       </div>
