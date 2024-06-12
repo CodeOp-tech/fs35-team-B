@@ -4,8 +4,10 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* color: rgba(255, 255, 255, 0.87); */
+  color: #333333; /* experimental */
+  /* background-color: #242424;  */
+  background-color: #f5f5f5;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,6 +22,7 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
 /* moved in from App.css */
@@ -33,18 +36,21 @@ body {
 /* moved in from App.css */
 .card {
   padding: 2em;
+  background-color: #fff; 
+  border: 1px solid #0a534d; 
 }
 
 /* SIDENAV CSS */
 
 .sideBar {
   position: fixed;
-  top: 56px; /* below topnav & header */
+  top: 61px; /* below topnav & header */
   right: 0;
   width: 130px;
   height: calc(100vh - 56px); /* full height minus topnav & header */
-  background-color: #f8f9fa;
-  border: 1px solid palevioletred;
+  background-color: #0a534d;
+  /* border: 1px solid palevioletred; */
+  border: 1px solid #a0522d;
   padding-top: 20px;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   z-index: 1000;
@@ -57,15 +63,21 @@ body {
 .sideBar button {
   padding: .3em .6em;
   font-size: .8em;
+  background-color: #0a534d;
+  color: #f5f5f5;
+}
+
+.sideBar button:hover {
+  background-color: #15837a ;
 }
 
 .sideBar .nav-link {
-  color: #000;
+  color: #333333;
   margin-bottom: 10px;
 }
 
 .sideBar .nav-link:hover{
-  color: #007bff;
+  color: #1974d2;
 }
 
 
@@ -74,6 +86,22 @@ body {
 .navbar{
   z-index: 950;
   padding: 0.5rem;
+  background-color: #0a534d;
+  color: #f5f5f5;
+}
+
+.nav-item .navbar-text {
+  color: #f5f5f5;
+}
+
+.nav-link {
+  color: #f5f5f5;
+}
+
+.nav-link:hover{
+  color: goldenrod;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .navbar .form-inline {
@@ -92,9 +120,21 @@ body {
   margin-left: 8px;
 }
 
+.navbar .btn-primary {
+  background: #15837a;
+  border: none;
+}
+
+.navbar .btn-primary:hover {
+  background-color: goldenrod;
+  color: #0a534d;
+  font-weight: bold;
+}
+
 .navbar-brand {
   margin-left: 8px;
-  font-size: 1.2em;
+  font-size: 2.5vw;
+  text-shadow: #000;
 }
 
 /* HEADER CSS */
@@ -111,6 +151,8 @@ body {
   left: 0; 
   top: 56px;
   z-index: 900;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .header-content {
@@ -119,6 +161,13 @@ body {
   justify-content: center;
   width: 100%;
   padding: 0 20px;
+}
+
+.header h1 {
+  font-size: 4vw;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #0a534d;
 }
 
 /* IFRAME STYLES */
@@ -138,7 +187,11 @@ body {
 .iframe-container iframe {
   width: 80vw;
   height: 100%;
-  border: 2px solid black;
+  border: 2px solid #333333;
+}
+
+.iframe-container iframe #document{
+  size: 75%; 
 }
 
 .top-text, .bottom-text {
@@ -146,6 +199,8 @@ body {
   color: #000;
   text-align: center;
 }
+
+
 
 a {
   font-weight: 500;
@@ -225,6 +280,10 @@ button:focus-visible {
     top: 0;
     width: 100%;
   }
+
+  /* .navbar-brand{
+    font-size: 6.5vw;
+  } */
 
   .content{
     padding: 1rem;
