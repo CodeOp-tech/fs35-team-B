@@ -22,3 +22,14 @@ li {
     justify-content: space-evenly;
     padding: 1em;
 }
+
+.custom-img {
+    width: 50%;
+    height: auto;
+  }
+
+  .card .img-fit {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
