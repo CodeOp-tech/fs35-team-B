@@ -29,9 +29,18 @@ const TopNav = () => {
     signOut();
     console.log("Successfully Logged Out!")
   };
+
+  const closeNavbar = () => {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    if (navbarToggler.classList.contains('show')){
+      navbarToggler.click();
+    }
+  };
+
+
   return (
     <nav className="navbar navbar-expand-sm fixed-top w-100"> {/* navbar-light bg-light */}
-    <Link className="navbar-brand" to="/">🦆</Link>
+    <Link className="navbar-brand" to="/" onClick={closeNavbar} >🦆</Link>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -63,10 +72,10 @@ const TopNav = () => {
               </form>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link' to='/resources' >Resources</Link>
+              <Link className='nav-link' to='/resources' onClick={closeNavbar}  >Resources</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/register">Register</Link>
+              <Link className="nav-link" to='/register' onClick={closeNavbar} >Register</Link>
             </li>
           </>
         ) : (
@@ -78,7 +87,7 @@ const TopNav = () => {
               <button className="btn btn-primary" onClick={logout}>Log Out</button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/resources">Resources</Link>
+              <Link className="nav-link" to="/resources" onClick={closeNavbar} >Resources</Link>
             </li>
             <li className='nav-item'>
               <Link className='nav-link' to='/upload'>Upload</Link>

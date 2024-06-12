@@ -135,6 +135,7 @@ export default function Upload() {
 
 
   return (
+    <div className='content upload-page' >
     <div className="create-category-container">
       <br />
       <br />
@@ -205,6 +206,7 @@ export default function Upload() {
         <button className="btn btn-outline-secondary" type="submit">Upload</button> 
       </form> 
       </div>   
+    </div>
     </div>
   );
 }

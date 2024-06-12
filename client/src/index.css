@@ -17,9 +17,12 @@
 
 body {
   margin: 0;
-  padding-top: 86px; /* accommodate topnav and header */
-  padding-right: 200px; /*accommodate the size of side nav */
+  /* padding-top: 86px; 
+  padding-right: 200px;  */
+  padding: 4rem 1rem 1rem 1rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: #f5f5f5;
@@ -30,7 +33,8 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  width: 100%;
+  /* text-align: center; */
 }
 
 /* moved in from App.css */
@@ -43,27 +47,32 @@ body {
 
 .sideBar {
   position: fixed;
-  top: 61px; /* below topnav & header */
+  top: 68px; /* below topnav & header */
   right: 0;
-  width: 130px;
-  height: calc(100vh - 56px); /* full height minus topnav & header */
+  width: 18vw ;
+  height: calc(100vh - 60px); /* full height minus topnav & header */
   background-color: #0a534d;
-  /* border: 1px solid palevioletred; */
-  border: 1px solid #a0522d;
-  padding-top: 20px;
+  border: 3px solid #a0522d;
+  padding-top: 1rem;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   z-index: 1000;
   display: flex;
+  /* display:block; */
   flex-direction: column;
+  overflow-y: auto;
+  align-items: flex-start;
   /*margin: 5%;
   flex-grow: 4; */
 }
 
 .sideBar button {
-  padding: .3em .6em;
-  font-size: .8em;
+  padding: .3rem 1rem;
+  font-size: .8rem;
   background-color: #0a534d;
   color: #f5f5f5;
+  margin: 0.5rem 0;
+  text-align: left;
+  /* display: inline-flex; */
 }
 
 .sideBar button:hover {
@@ -73,6 +82,7 @@ body {
 .sideBar .nav-link {
   color: #333333;
   margin-bottom: 10px;
+  width: 100px;
 }
 
 .sideBar .nav-link:hover{
@@ -87,6 +97,16 @@ body {
   padding: 0.5rem;
   background-color: #0a534d;
   color: #f5f5f5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 2px solid #a0522d;
+}
+
+.navbar .navbar-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .nav-item .navbar-text {
@@ -112,7 +132,7 @@ body {
 .navbar .form-control {
   width: auto;
   flex: 1;
-  
+  margin-right: 0.5rem;
 }
 
 .navbar .form-inline .btn {
@@ -122,6 +142,7 @@ body {
 .navbar .btn-primary {
   background: #15837a;
   border: none;
+  margin-left: 0.5rem;
 }
 
 .navbar .btn-primary:hover {
@@ -131,8 +152,8 @@ body {
 }
 
 .navbar-brand {
-  margin-left: 8px;
-  font-size: 2.5vw;
+  /* margin-left: 8px; */
+  font-size: 1.75rem;
   text-shadow: #000;
 }
 
@@ -140,9 +161,10 @@ body {
 
 .header {
   background-color: goldenrod;
+  border: 2px solid #a0522d;
   /* width: calc(100%-200px); */
   width: 100%;
-  height: 50px;
+  /* height: 50px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,41 +172,38 @@ body {
   left: 0; 
   top: 56px;
   z-index: 900;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 1rem 0;
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 0 20px;
+  /* width: 100%;
+  padding: 0 20px; */
 }
 
 .header h1 {
-  font-size: 4vw;
+  font-size: 2.5rem;
   padding-top: 10px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   color: #0a534d;
+  margin: 0;
 }
 
 /* IFRAME STYLES */
 
-/* .home-page {
-  padding-top: 136px;
-  padding-right: 200px;
-} */
-
 .iframe-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 136px);
+  /* height: calc(100vh - 136px); */
+  height: 70vh;
 
 }
 
 .iframe-container iframe {
-  width: 80vw;
+  /* width: 90vw; */
+  width: 100%;
   height: 100%;
   border: 2px solid #333333;
 }
@@ -200,6 +219,13 @@ body {
 }
 
 
+/* Universal bits*/
+
+.content{
+  margin-right: 18vw;
+  padding-top: 5em ;
+  width: calc(100% - 18vw);
+}
 
 a {
   font-weight: 500;
@@ -260,6 +286,7 @@ button:focus-visible {
 
   .sideBar {
     width: 100%;
+    display: block;
     height: auto;
     position: static;
     top: 136px;
@@ -286,6 +313,8 @@ button:focus-visible {
 
   .content{
     padding: 1rem;
+    width: 100%;
+    margin-right: ;
   }
 
   .toggle-button {

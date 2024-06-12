@@ -10,17 +10,21 @@ const supersecret = process.env.SUPER_SECRET;
 
 router.post("/register", async (req, res) => {
   const { username, password, email } = req.body;
-
+  const isRegistered = `SELECT COUNT(*) as count FROM users WHERE username="${username}";`;
   try {
     const hash = await bcrypt.hash(password, saltRounds);
-
+    const checkIsRegistered = await db(isRegistered);
+    if (checkIsRegistered.data[0].count > 0 ){
+      res.status(400).send({message: "Username Already Exists"})
+    } else {
     await db(
-      `INSERT INTO users (username, password, email) VALUES ("${username}", "${hash}", "${email}");`
+      `INSERT INTO users (username, password, email) VALUES
+      ("${username}", "${hash}", "${email}");`
     );
 
-    res.send({ message: "Register successful" });
+    res.send({ message: "Register successful" });}
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
