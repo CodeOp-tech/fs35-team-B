@@ -39,7 +39,6 @@ body {
 
 /* moved in from App.css */
 .card {
-  padding: 2em;
   background-color: #fff; 
   border: 1px solid #0a534d; 
 }
