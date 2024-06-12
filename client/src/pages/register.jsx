@@ -49,6 +49,7 @@ const handleRegister = () => {
 
   return (
       <>
+      <div className='content register-page' >
       <form action="submit" onSubmit={handleSubmit} autoComplete='off'>
       <div>
         <label htmlFor="username">Username</label>
@@ -88,6 +89,7 @@ const handleRegister = () => {
       {error && <div className='error'>{error}</div>}
       <div>
         <p>Already registered? Login <Link Link to="/">here</Link></p>
+      </div>
       </div>
       </>
     );

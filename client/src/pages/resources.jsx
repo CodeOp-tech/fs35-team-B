@@ -82,7 +82,7 @@ const deleteResource = (id, field) => {
 
 
 return (
-    <div>
+    <div className='content resources-page' >
         <h1>Resources</h1>
         <br />
         <br />
