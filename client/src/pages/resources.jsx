@@ -16,7 +16,6 @@ function resources() {
 const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
 const { categories, setCategories } = useContext(CategoriesContext);
 const [resourcesData, setResourcesData ] = useState ([]);
-const [resources, setResources] = useState([])
 
 // search params to access the query parameters from the url in postman (resources?category=3)
 const [searchParams] = useSearchParams();
@@ -60,21 +59,25 @@ if (searchParams) {
   }
 }, [searchParams]);
 
-const deleteResource = (id) => {     
+const deleteResource = (id, field) => { 
+  let payload = { [field]: true}    
       fetch(`/api/resources/${id}`, {
-        method: "DELETE",
-         headers: {          
+        method: "PUT",
+         headers: {    
+          "Content-Type": "application/json",      
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
+         body: JSON.stringify(payload)
       })
       .then((response) => response.json())
       .then((resource) => {
-      setResources(resource);
+      setResourcesData(resource);
       })
       .catch((error) => {
         console.log(error)
        
       });
+      
     };
 
 
@@ -95,27 +98,29 @@ return (
         <ul>
             {resourcesData.map(resource => (
                 <li key={resource.id}>
-              <h2>{resource.notes}</h2>
+              <h2>{resource.notes}</h2> 
+              {isLoggedIn && resource.user_id !== 0 ?
+            (<button onClick={()=>deleteResource(resource.id, "notes")}>❌</button>) : null}
            <p>
             <a href={resource.link_url}>Link</a>
            {isLoggedIn && resource.user_id !== 0 ?
-            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+            (<button onClick={()=>deleteResource(resource.id, "link_url")}>❌</button>) : null}
            </p>
            <p>
             <a href={resource.vid_url}>Video</a>
             {isLoggedIn && resource.user_id !== 0 ?
-            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+            (<button onClick={()=>deleteResource(resource.id, "vid_url")}>❌</button>) : null}
           </p>
            {resource.img}
            <img src={`/uploads/${resource.img}`}
-           alt={resource.notes}
+           
           />
           {isLoggedIn && resource.user_id !== 0 ?
-            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+            (<button onClick={()=>deleteResource(resource.id, "img")}>❌</button>) : null}
           <p>
             <a href = {`/uploads/${resource.doc}`} download >Document</a>
             {isLoggedIn && resource.user_id !== 0 ?
-            (<button onClick={()=>deleteResource(resource.id)}>❌</button>) : null}
+            (<button onClick={()=>deleteResource(resource.id, "doc")}>❌</button>) : null}
           </p>
                 </li>
             ))}

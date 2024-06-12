@@ -116,7 +116,7 @@ router.post("/", getUserId, upload.fields([{ name: "imagefile" }, { name: "docum
 
   try {
     await db(post);
-    const result = await db('SELECT * FROM resources'); // Adjust the select query as needed
+    const result = await db('SELECT * FROM resources'); 
     res.send(result);
   } catch (err) {
     res.status(500).send(err);
@@ -134,5 +134,26 @@ router.delete("/:id", [userMustBeLoggedIn, protectPublicResource("resources"), r
         res.status(500).send(err);
     }
 });
+
+router.put("/:id", [userMustBeLoggedIn, protectPublicResource("resources"), resourceMustExist], async function(req, res){
+  const {id} = req.params;
+  const {link_url, vid_url, doc, img, notes} = req.body;
+  console.log(req.body)
+  const updateField = [];
+  try{
+    if (link_url !== undefined) updateField.push("link_url =''");
+    if (vid_url !== undefined) updateField.push("vid_url = ''");
+    if (doc !== undefined) updateField.push("doc = ''");
+    if (img !== undefined) updateField.push("img = ''");
+    if (notes !== undefined) updateField.push("notes = ''");
+
+    await db(`UPDATE resources SET ${updateField.join(", ")} WHERE id='${id}'`);
+    const result = await db(`SELECT * FROM resources WHERE id =${req.params.id};`);
+    res.send(result.data);
+  }catch(err){
+    res.status(500).send(err);
+  }  
+});
+
 
 module.exports = router;
