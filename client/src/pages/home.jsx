@@ -23,7 +23,7 @@ export default function home() {
   return (
     <div className="content home-page">
       <div className="top-text" >  
-        <p>Welcome to The Confused Coder, your cusomizeable repository for coding resources! </p>
+        <p>Welcome to The Confused Coder, your customizable repository for coding resources! </p>
       </div>
       <div className="iframe-container">
         <iframe ref={iframeRef} src="https://xkcd.com/323/" frameborder="0"></iframe>
