@@ -244,5 +244,3 @@ function resources() {
 }
 export default resources
 
-
-
