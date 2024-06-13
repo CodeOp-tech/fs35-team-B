@@ -65,10 +65,10 @@ return (
     <div className="sideBar">
     {categories.map(category => (
       <div key={category.id}>
-        <button onClick={() => handleClick(category.id)}> {category.type} </button>
+        <span className='resource-nav' ><button onClick={() => handleClick(category.id)}>{category.type}</button></span>
         {isLoggedIn && category.user_id !== 0 ? (
           <button onClick={() => deleteCategory(category.id)}>❌</button>
-        ) : null}
+        ) : null} 
       </div>
     ))}
     </div>
