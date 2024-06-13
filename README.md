@@ -42,7 +42,7 @@ You can test your client app in http://localhost:5173
 The TopNav presents three buttons. The buttons shown depend on the login state:
 
 - logged-out users see 'Login', 'Resources' and 'Register'
-- logged-in users serr 'Logout', 'Resources' and 'Upload'
+- logged-in users see 'Logout', 'Resources' and 'Upload'
 
 The SideNav presents three available categories:
 
