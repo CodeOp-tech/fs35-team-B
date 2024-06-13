@@ -2,16 +2,19 @@ import React, { useState, useContext}  from 'react';
 import authContext from "../contexts/authContext";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 const TopNav = () => {
   const {isLoggedIn, username, signIn, signOut} = useContext(authContext);
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
+
   const login = async (e) => {
     e.preventDefault();
     try {
@@ -20,19 +23,23 @@ const TopNav = () => {
       signIn(credentials.username);
       setCredentials({username:"", password:""});
       console.log(data.message, data.token);
+      closeNavbar();
     } catch(error){
       console.log(error);
     }
   };
+
   const logout = () => {
     localStorage.removeItem("token");
     signOut();
     console.log("Successfully Logged Out!")
+    closeNavbar();
   };
 
   const closeNavbar = () => {
     const navbarToggler = document.querySelector('.navbar-toggler');
-    if (navbarToggler.classList.contains('show')){
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse.classList.contains('show')){
       navbarToggler.click();
     }
   };
@@ -90,7 +97,7 @@ const TopNav = () => {
               <Link className="nav-link" to="/resources" onClick={closeNavbar} >Resources</Link>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link' to='/upload'>Upload</Link>
+              <Link className='nav-link' to='/upload' onClick={closeNavbar}>Upload</Link>
             </li>
           </>
         )}
