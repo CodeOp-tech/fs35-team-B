@@ -23,12 +23,13 @@ After cloning the repo into your computer, you will need to..
 ### 5. Database prep
 
 Create a local MySQL database.
-Add a .env to your root folder containing the MySQL authentication information for the root user as well as the name of your database. For example:
-  DB_HOST=localhost
-  DB_USER=root
-  DB_PASS=YOURPASSWORD
-  DB_NAME=YOURDATABASE
-  SUPER_SECRET = lotsOfCandy
+Add a .env to your root folder containing the MySQL authentication information for the root user as well as the name of your database. 
+For example:
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=YOURPASSWORD
+DB_NAME=YOURDATABASE
+SUPER_SECRET = lotsOfCandy
 Run `npm run migrate` in your terminal in order to create the DB tables.
 
 ### 6. Development
