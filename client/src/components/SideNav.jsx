@@ -44,7 +44,7 @@ function SideNav() {
       alert("Do you really want to delete the category and all its possible resources?")
       fetch(`/api/categories/${id}`, {
         method: "DELETE",
-         headers: {          
+        headers: {          
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       })
@@ -54,7 +54,6 @@ function SideNav() {
       })
       .catch((error) => {
         console.log(error)
-       
       });
     };
 
@@ -63,14 +62,16 @@ function SideNav() {
 return (
   <div>
     <div className="sideBar">
-    {categories.map(category => (
-      <div key={category.id}>
-        <span className='resource-nav' ><button onClick={() => handleClick(category.id)}>{category.type}</button></span>
-        {isLoggedIn && category.user_id !== 0 ? (
-          <button onClick={() => deleteCategory(category.id)}>❌</button>
-        ) : null} 
-      </div>
-    ))}
+      {categories.map(category => (
+        <div className='category-item' key={category.id}>
+          <button className='category-button' onClick={() => handleClick(category.id)}>
+            {category.type}
+          </button>
+          {isLoggedIn && category.user_id !== 0 ? (
+            <button className='delete-button' onClick={() => deleteCategory(category.id)}>❌</button>
+          ) : null} 
+        </div>
+      ))}
     </div>
   </div>
 );
