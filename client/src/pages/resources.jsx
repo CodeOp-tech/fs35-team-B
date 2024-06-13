@@ -114,10 +114,14 @@ return (
             <a href={resource.link_url} class="btn btn-success"
             > Documentation </a>
           ) : null }
+          {isLoggedIn && resource.user_id !== 0 && resource.notes ?
+
+            (<button onClick={()=>deleteResource(resource.id, "notes")} className="btn btn-light">❌</button>
+           ) : null }
          
 
-           {isLoggedIn && resource.user_id !== 0 ? (
-            <button onClick={()=>deleteResource(resource.id, "notes")}className="btn btn-light">❌</button>) : null}
+           {isLoggedIn && resource.user_id !== 0 && resource.link_url ? (
+            <button onClick={()=>deleteResource(resource.id, "link_url")}className="btn btn-light">❌</button>) : null}
            </p>
         
            <p  className="card-text">
@@ -125,7 +129,7 @@ return (
             <a href={resource.vid_url}  class="btn btn-success"
             > Video</a>
           ): null }
-            {isLoggedIn && resource.user_id !== 0 ?
+            {isLoggedIn && resource.user_id !== 0 && resource.vid_url ?
 
             (<button onClick={()=>deleteResource(resource.id, "vid_url")} className="btn btn-light">❌</button>
            ) : null }
@@ -133,21 +137,18 @@ return (
           </p>
           <div className= "card h-100 border-0">
            {resource.img ? (
-           <img src={`/uploads/${resource.img}`}
-
-           alt={resource.notes}
+           <img src={`/uploads/${resource.img}`}         
            classname = "card-img-top img-fit"
           />
            ) : null }
             </div>
-          {isLoggedIn && resource.user_id !== 0 ?
-
+          {isLoggedIn && resource.user_id !== 0 && resource.img ?
             (<button onClick={()=>deleteResource(resource.id, "img")}className="btn btn-light">❌</button>) : null}
-          <p>
-            <a href = {`/uploads/${resource.doc}`} download class="btn btn-success"
-            > File</a>
-            {isLoggedIn && resource.user_id !== 0 ?
-
+          <p>            
+            {resource.doc ? 
+              (<a href = {`/uploads/${resource.doc}`} download class="btn btn-success"
+            > File</a>) : null}
+           {isLoggedIn && resource.user_id !== 0 && resource.doc?
             (<button onClick={()=>deleteResource(resource.id, "doc")}className="btn btn-light">❌</button>) : null}
           </p>
               
